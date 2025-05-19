@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchFeaturedProducts } from "../api/products";
 
+import offers from "../assets/images/offers.webp";
+import newProducts from "../assets/images/new-products.webp";
+import technology from "../assets/images/technology.webp";
+import fashion from "../assets/images/fashion.webp";
+import home from "../assets/images/home-deco.webp";
+import food from "../assets/images/fodd.webp";
+
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import ProductList from "../components/Products/ProductList";
@@ -70,14 +77,14 @@ export default function Home({ addToCart }) {
 
       <section className={styles.banners}>
         <div className={styles.banner}>
-          <img src="https://picsum.photos/300?banner=1" alt="Banner 1" />
+          <img src={offers} alt="Ofertas" />
           <h3>Ofertas de Temporada</h3>
           <p>¡No te pierdas nuestras increíbles ofertas de temporada! Descuentos de hasta el 50% en productos
             seleccionados.</p>
           <a href="#" className="btn btn-primary">Ver Ofertas</a>
         </div>
         <div className={styles.banner}>
-          <img src="https://picsum.photos/300?banner=2" alt="Banner 2" />
+          <img src={newProducts} alt="Nuevos productos" />
           <h3>Nuevos Productos</h3>
           <p>Descubre las últimas novedades en nuestro catálogo. ¡Productos innovadores que te encantarán!</p>
           <a href="#" className="btn btn-primary">Ver Nuevos Productos</a>
