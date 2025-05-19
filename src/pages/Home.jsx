@@ -7,7 +7,7 @@ import newProducts from "../assets/images/new-products.webp";
 import technology from "../assets/images/technology.webp";
 import fashion from "../assets/images/fashion.webp";
 import home from "../assets/images/home-deco.webp";
-import food from "../assets/images/fodd.webp";
+import food from "../assets/images/food.webp";
 
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";

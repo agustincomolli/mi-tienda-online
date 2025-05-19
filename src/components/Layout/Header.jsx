@@ -1,5 +1,5 @@
 import styles from "./Header.module.css"
-import logo from "../../assets/react.svg"
+import logo from "../../assets/icons/react.svg"
 import cartImage from "../../assets/icons/cart.svg"
 
 /**
