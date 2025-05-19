@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./PageNotFound.module.css";
-import Error404 from "../assets/404.webp";
+import Error404 from "../assets/images/404.webp";
 
 export default function PageNotFound() {
 

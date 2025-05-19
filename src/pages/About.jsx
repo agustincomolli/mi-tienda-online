@@ -1,9 +1,9 @@
 import styles from "./About.module.css";
 
-import luis from "../assets/luis.png";
-import sabrina from "../assets/sabrina.png";
-import matias from "../assets/matias.png"
-import silvia from "../assets/silvia.png"
+import luis from "../assets/images/luis.png";
+import sabrina from "../assets/images/sabrina.png";
+import matias from "../assets/images/matias.png"
+import silvia from "../assets/images/silvia.png"
 
 export default function About() {
   return (

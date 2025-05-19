@@ -1,6 +1,6 @@
 import styles from "./Header.module.css"
 import logo from "../../assets/react.svg"
-import cartImage from "../../assets/cart.svg"
+import cartImage from "../../assets/icons/cart.svg"
 
 /**
  * Componente de cabecera de la aplicación.
