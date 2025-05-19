@@ -20,7 +20,7 @@ export default function Login() {
       localStorage.setItem("authToken", "miTokenSecreto");
 
       Swal.fire({
-        title: "Información de contacto",
+        title: "Inicio de sesión",
         html: successMessage,
         icon: "success",
         confirmButtonText: "Continuar",
