@@ -1,0 +1,35 @@
+.nav {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  padding: 10px 0;
+}
+
+.navMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navMenuLink {
+  display: block;
+  color: var(--text-light);
+  text-decoration: none;
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-bottom: 1px solid transparent;
+}
+
+.navMenuLink:hover {
+  border-bottom: 1px solid var(--text-light);
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.icon {
+  color: var(--text-light);
+}

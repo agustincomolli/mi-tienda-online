@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Mi Tienda Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos específicos para la página Nosotros */
+        .about-us {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .about-us p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .history {
+            text-align: left;
+            padding: 20px;
+        }
+
+        .history h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .history p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .mission-vision {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .mission-vision div {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        .mission-vision h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .team {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .team h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            flex: 1;
+            text-align: center;
+            margin: 10px;
+            min-width: 200px;
+        }
+
+        .team-member img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .team-member h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">Logo</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar productos...">
+            <button>Buscar</button>
+        </div>
+        <div class="cart">Carrito (0)</div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="about-us">
+            <h2>Acerca de Nosotros</h2>
+            <p>
+                Bienvenidos a Mi Tienda Online, tu destino de compras en línea. Nos dedicamos a ofrecerte la mejor selección de
+                productos con una experiencia de compra fácil y agradable. Nuestra misión es satisfacer tus necesidades y
+                superar tus expectativas en cada compra.
+            </p>
+            <p>
+                Creemos en la calidad, la variedad y el excelente servicio al cliente. Trabajamos con pasión para traerte las
+                últimas tendencias y los productos más innovadores del mercado.
+            </p>
+        </div>
+
+        <div class="history">
+            <h3>Nuestra Historia</h3>
+            <p>
+                Mi Tienda Online comenzó como un pequeño emprendimiento en [Año de inicio]. Con el tiempo, gracias a la
+                confianza de nuestros clientes y nuestro compromiso con la excelencia, hemos crecido hasta convertirnos en
+                una tienda en línea líder en el mercado.
+            </p>
+            <p>
+                A lo largo de los años, hemos ampliado nuestra oferta de productos, mejorado nuestra plataforma y fortalecido
+                nuestro equipo. Pero nuestra esencia sigue siendo la misma: ofrecerte una experiencia de compra excepcional.
+            </p>
+        </div>
+
+        <div class="mission-vision">
+            <div>
+                <h4>Nuestra Misión</h4>
+                <p>
+                    Ofrecer productos de alta calidad y un servicio al cliente excepcional, creando una experiencia de compra
+                    en línea que supere las expectativas de nuestros clientes.
+                </p>
+            </div>
+            <div>
+                <h4>Nuestra Visión</h4>
+                <p>
+                    Ser la tienda en línea preferida por los clientes, reconocida por nuestra variedad de productos,
+                    innovación y compromiso con la satisfacción del cliente.
+                </p>
+            </div>
+        </div>
+
+        <div class="team">
+            <h2>Nuestro Equipo</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://picsum.photos/150?team=1" alt="Miembro 1">
+                    <h3>Juan Pérez</h3>
+                    <p>CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://picsum.photos/150?team=2" alt="Miembro 2">
+                    <h3>María García</h3>
+                    <p>Gerente de Ventas</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://picsum.photos/150?team=3" alt="Miembro 3">
+                    <h3>Carlos Rodríguez</h3>
+                    <p>Jefe de Marketing</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://picsum.photos/150?team=4" alt="Miembro 4">
+                    <h3>Ana Martínez</h3>
+                    <p>Desarrolladora Web</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="contact-info">
+            <h4>Contacto</h4>
+            <p>Email: info@mitienda.com</p>
+            <p>Teléfono: +123 456 789</p>
+        </div>
+        <div class="useful-links">
+            <h4>Enlaces Útiles</h4>
+            <ul>
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Mi Tienda Online. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="cart-dropdown">
+        <h3>Tu Carrito</h3>
+        <ul class="cart-items">
+            <li>Producto 1</li>
+        </ul>
+        <div class="cart-summary">
+            <p>Subtotal: $0.00</p>
+            <button>Ver Carrito</button>
+            <button>Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script>
+        // Aquí iría tu código JavaScript para la funcionalidad del carrito desplegable
+        const cartIcon = document.querySelector('.cart');
+        const cartDropdown = document.querySelector('.cart-dropdown');
+
+        if (cartIcon && cartDropdown) {
+            cartIcon.addEventListener('click', () => {
+                cartDropdown.classList.toggle('active'); // Clase 'active' para mostrar/ocultar
+            });
+
+            // Ocultar el carrito al hacer clic fuera de él (opcional)
+            document.addEventListener('click', (event) => {
+                if (!cartIcon.contains(event.target) && !cartDropdown.contains(event.target)) {
+                    cartDropdown.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

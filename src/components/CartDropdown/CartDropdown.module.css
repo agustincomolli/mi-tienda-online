@@ -1,0 +1,95 @@
+.cartDropdown {
+  /* Ajustar según la altura del header */
+  top: 60px;
+  position: absolute;
+  right: 20px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color-medium);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  width: 300px;
+  box-shadow: var(--shadow-sm);
+  /* Asegurar que esté por encima de otros elementos */
+  z-index: 10;
+}
+
+.cartItems {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.cartItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.cartItem:last-child {
+  border-bottom: none;
+}
+
+.itemInfo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.itemInfo h4 {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+}
+
+.itemInfo p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+}
+
+.itemControls {
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+}
+
+.itemControls button {
+  background: none;
+  border: 1px solid var(--border-color);
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+}
+
+.itemControls span {
+  margin: 0 var(--spacing-xs);
+}
+
+.removeBtn {
+  margin-left: var(--spacing-xs);
+  color: red;
+}
+
+.cartSummary {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.cartSummary p {
+  margin: 1rem 0;
+}
+
+.cartSummaryButton {
+  margin-left: 10px;
+}

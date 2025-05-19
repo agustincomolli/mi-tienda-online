@@ -1,0 +1,52 @@
+.productCard {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.productCard a {
+  text-decoration: none;
+  color: inherit;
+
+}
+
+.productCard:hover {
+  background-color: var(--bg-light);
+}
+
+.productCard img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.productCard h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.productCard p {
+  margin-bottom: 10px;
+  color: var(--text-secondary);
+}
+
+.productCard button {
+  justify-self: flex-end;
+}
+
+.productCardFooter {
+  /* Empuja el footer hacia abajo */
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

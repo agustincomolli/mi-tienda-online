@@ -1,0 +1,71 @@
+.header {
+  background-color: var(--bg-light);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logoImage {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+
+.searchBar {
+  display: flex;
+}
+
+.searchBar input[type="text"] {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color-medium);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  width: 220px;
+}
+
+.searchBar button {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.cart {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.cartImage {
+  height: 1.3rem;
+}
+
+.cartItemCount {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: .25rem .6rem;
+  min-width: 1.5rem;
+  text-align: center;
+}

@@ -1,0 +1,92 @@
+.pageContainer {}
+
+.about {
+  padding: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about p,
+.history p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.history {
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.history h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.missionVision {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.missionVision div {
+  flex: 1;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  margin: .725rem;
+
+}
+
+.missionVision h4 {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.team {
+  text-align: center;
+  padding: 1.25rem;
+}
+
+.team h2 {
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.teamMembers {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.member {
+  flex: 1;
+  text-align: center;
+  margin: var(--spacing-sm);
+  min-width: 200px;
+}
+
+.member img {
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-sm);
+}
+
+.member h3{
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.member p {
+  font-size: .9rem;
+  color: var(--text-secondary);
+}

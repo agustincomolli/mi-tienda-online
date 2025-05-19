@@ -1,0 +1,81 @@
+.cart {}
+
+.cartItems {}
+
+.cartItemsHeader {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.emptyCartMessage {
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.cartItemsDetails {}
+
+.products {}
+
+.productItem {}
+
+.cartActions {
+  max-width: 350px;
+  margin-bottom: 1.5rem;
+}
+
+.cartActionButton {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.promotionalCodeText,
+.cartNote {
+  margin-top: .5rem;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  border: 1px solid var(--text-dark);
+  border-radius: 2px;
+}
+
+.promotionalCodeText {
+  width: 180px;
+}
+
+.promotionalCodeButton {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  padding: .5rem 1.25rem;
+  font-size: 1rem;
+  border: 1px solid var(--text-dark);
+  cursor: pointer;
+  margin-left: .5rem;
+}
+
+.cartNote {
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+  font-family: var(--font-family);  
+}
+
+/* 
+.hidden {
+  display: none;
+} */
+
+.cartSummary {}
+
+.cartSummaryHeader {}
+
+.cartSummarySubtotal {}
+
+.cartSummaryTotal {}

@@ -1,0 +1,38 @@
+.loginContent {
+  margin-bottom: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+   min-height: 50vh;
+}
+
+.loginContent h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding: calc(var(--spacing-xl)*2) 5%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.loginForm input,
+.loginForm button {
+  font-size: 1rem;
+}
+
+.loginForm input {
+  padding: var(--spacing-xs);
+}
+
+.loginButton {
+  padding: 10px
+}

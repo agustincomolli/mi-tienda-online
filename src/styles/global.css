@@ -1,0 +1,56 @@
+@import './variables.css';
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos base del cuerpo */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Clases de utilidad reutilizables */
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--text-light);
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  color: var(--text-light);
+}
+
+.pageContent {
+  padding: 2.5rem;
+  line-height: 1.5;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.pageContent h2{
+  margin-bottom: 1.25rem;
+}
+
+.pageContent h3 {
+  margin: 1.15rem 0;
+}
+
+.pageContent p{
+  margin: 1rem 0;
+}

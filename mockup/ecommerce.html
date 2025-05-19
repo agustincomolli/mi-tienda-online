@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Tienda Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo">Logo</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar productos...">
+      <button>Buscar</button>
+    </div>
+    <div class="cart">Carrito (0)</div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Categoría 1</a></li>
+      <li><a href="#">Categoría 2</a></li>
+      <li><a href="#">Categoría 3</a></li>
+      <li><a href="#">...</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="product-listing">
+      <h2>Productos Disponibles</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="https://picsum.photos/150" alt="Producto 1">
+          <h3>Producto 1</h3>
+          <p>$XX.XX</p>
+          <button>Agregar al Carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="https://picsum.photos//150" alt="Producto 2">
+          <h3>Producto 2</h3>
+          <p>$YY.YY</p>
+          <button>Agregar al Carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="https://picsum.photos//150" alt="Producto 3">
+          <h3>Producto 3</h3>
+          <p>$ZZ.ZZ</p>
+          <button>Agregar al Carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="https://picsum.photos//150" alt="Producto 4">
+          <h3>Producto 4</h3>
+          <p>$AA.AA</p>
+          <button>Agregar al Carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="https://picsum.photos//150" alt="Producto 5">
+          <h3>Producto 5</h3>
+          <p>$BB.BB</p>
+          <button>Agregar al Carrito</button>
+        </div>
+        <div class="product-card">
+          <img src="https://picsum.photos//150" alt="Producto 6">
+          <h3>Producto 6</h3>
+          <p>$CC.CC</p>
+          <button>Agregar al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contact-info">
+      <h4>Contacto</h4>
+      <p>Email: info@mitienda.com</p>
+      <p>Teléfono: +123 456 789</p>
+    </div>
+    <div class="useful-links">
+      <h4>Enlaces Útiles</h4>
+      <ul>
+        <li><a href="#">Términos y Condiciones</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+      </ul>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2023 Mi Tienda Online. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="cart-dropdown">
+    <h3>Tu Carrito</h3>
+    <ul class="cart-items">
+      <li>Producto 1</li>
+    </ul>
+    <div class="cart-summary">
+      <p>Subtotal: $0.00</p>
+      <button>Ver Carrito</button>
+      <button>Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script>
+    // Aquí iría tu código JavaScript para la funcionalidad del carrito desplegable
+    const cartIcon = document.querySelector('.cart');
+    const cartDropdown = document.querySelector('.cart-dropdown');
+
+    if (cartIcon && cartDropdown) {
+      cartIcon.addEventListener('click', () => {
+        cartDropdown.classList.toggle('active'); // Clase 'active' para mostrar/ocultar
+      });
+
+      // Ocultar el carrito al hacer clic fuera de él (opcional)
+      document.addEventListener('click', (event) => {
+        if (!cartIcon.contains(event.target) && !cartDropdown.contains(event.target)) {
+          cartDropdown.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
