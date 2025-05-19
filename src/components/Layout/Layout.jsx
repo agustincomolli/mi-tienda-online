@@ -1,12 +1,13 @@
 import { useRef, useEffect } from "react";
 
-import Header from "./Header"
-import Nav from "./Nav"
-import Main from "./Main"
-import Footer from "./Footer"
-import CartDropdown from "../CartDropdown/CartDropdown"
+import Header from "./Header";
+import Nav from "./Nav";
+import Main from "./Main";
+import Footer from "./Footer";
+import CartDropdown from "../CartDropdown/CartDropdown";
+import WhatsApp from "../WhatsApp/WhatsApp";
 
-import styles from "./Layout.module.css"
+import styles from "./Layout.module.css";
 
 /**
  * Componente de layout general de la aplicación.
@@ -60,6 +61,7 @@ export default function Layout({ children, toggleCart, cartItemCount, showCart, 
                     <CartDropdown items={cartItemsList} setItems={setCartItemsList} />
                 </div>
             )}
+            <WhatsApp />
         </div>
     );
 }

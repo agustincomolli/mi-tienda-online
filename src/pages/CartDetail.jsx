@@ -59,13 +59,30 @@ export default function CartDetail({ items, setItems }) {
 
           <aside className={styles.cartSummary}>
             <header className={styles.cartSummaryHeader}>
-
+              <h3>Resumen del pedido</h3>
             </header>
             <main className={styles.cartSummarySubtotal}>
-
+              <dl>
+                <dt>Subtotal</dt>
+                <dd className="cart-subtotal-value">$ 0,00</dd>
+              </dl>
+              <dl>
+                <button className={styles.calculateShipping}>Calcular envío</button>
+              </dl>
+              <dl>
+                <dt>Envío</dt>
+                <dd className="cart-shipping-value">$ 0,00</dd>
+              </dl>
             </main>
             <footer className={styles.cartSummaryTotal}>
-
+              <dl>
+                <dt>Total</dt>
+                <dd className="total-value">$ 0,00</dd>
+              </dl>
+              <dl>
+                <button className={styles.finalizePurchase}>Finalizar compra</button>
+              </dl>
+              <p className={styles.securePayment}><i className='bx bxs-lock-alt'></i> Pago seguro</p>
             </footer>
           </aside>
         </section>
