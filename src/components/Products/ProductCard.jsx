@@ -1,5 +1,7 @@
 import styles from "./ProductCard.module.css"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 /**
  * Componente que representa un solo producto.
@@ -7,9 +9,10 @@ import { Link } from "react-router-dom";
  * 
  * @param {Object} props - Propiedades del componente.
  * @param {Object} props.product - Objeto con los datos del producto.
- * @param {Function} props.addToCart - Función para agregar el producto al carrito.
  */
-export default function ProductCard({ product, addToCart }) {
+export default function ProductCard({ product }) {
+    const { addToCart } = useContext(CartContext)
+
     function handleClick(event) {
         event.stopPropagation(); // Evita que el click en el botón navegue
         addToCart(product)

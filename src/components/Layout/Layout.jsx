@@ -17,13 +17,10 @@ import styles from "./Layout.module.css";
  * @param {Object} props - Propiedades del componente.
  * @param {ReactNode} props.children - Contenido principal a renderizar (las páginas).
  * @param {Function} props.toggleCart - Función para mostrar/ocultar el carrito.
- * @param {number} props.cartItemCount - Cantidad total de productos en el carrito.
  * @param {boolean} props.showCart - Indica si el carrito está visible.
  * @param {Function} props.setShowCart - Función para cambiar la visibilidad del carrito.
- * @param {Array} props.cartItemsList - Lista de productos en el carrito.
- * @param {Function} props.setCartItemsList - Función para actualizar la lista del carrito.
  */
-export default function Layout({ children, toggleCart, cartItemCount, showCart, setShowCart, cartItemsList, setCartItemsList }) {
+export default function Layout({ children, toggleCart, showCart, setShowCart }) {
     // Referencia al contenedor del carrito para detectar clics fuera de él
     const cartRef = useRef(null)
 
@@ -46,7 +43,7 @@ export default function Layout({ children, toggleCart, cartItemCount, showCart, 
     return (
         <div className={styles.layoutContainer}>
             {/* Header recibe funciones y datos como props */}
-            <Header toggleCart={toggleCart} cartItemCount={cartItemCount} />
+            <Header toggleCart={toggleCart} />
             <Nav />
             <Main>
                 {/* Renderiza el contenido principal de la página actual */}
@@ -58,7 +55,7 @@ export default function Layout({ children, toggleCart, cartItemCount, showCart, 
             {showCart && (
                 // El ref permite detectar clics fuera de este div para cerrar el carrito
                 <div ref={cartRef}>
-                    <CartDropdown items={cartItemsList} setItems={setCartItemsList} />
+                    <CartDropdown />
                 </div>
             )}
             <WhatsApp />

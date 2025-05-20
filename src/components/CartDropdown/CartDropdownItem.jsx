@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 import styles from "./CartDropdown.module.css"
 
 /**
@@ -6,10 +8,10 @@ import styles from "./CartDropdown.module.css"
  * 
  * @param {Object} props - Propiedades del componente.
  * @param {Object} props.item - Producto del carrito.
- * @param {Function} props.updateQuantity - Función para cambiar la cantidad.
- * @param {Function} props.removeItem - Función para eliminar el producto.
  */
-export default function CartItem({ item, updateQuantity, removeItem }) {
+export default function CartDropdownItem({ item }) {
+    const { removeItem, updateQuantity } = useContext(CartContext);
+
     function handleIncreaseQuantity() {
         updateQuantity(item.id, item.quantity + 1)
     };

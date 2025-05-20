@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { fetchProductById } from "../api/products";
+import { CartContext } from "../context/CartContext";
 
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -10,10 +11,9 @@ import styles from "./ProductDetail.module.css"
 /**
  * Componente que muestra el detalle de un producto seleccionado.
  * Obtiene el producto por su id desde la API y permite agregarlo al carrito.
- * 
- * @param {function} addToCart - Función para agregar el producto al carrito.
  */
-export default function ProductDetail({ addToCart }) {
+export default function ProductDetail() {
+  const {addToCart} = useContext(CartContext);
   // Obtiene el parámetro 'id' de la URL
   const { id } = useParams();
 

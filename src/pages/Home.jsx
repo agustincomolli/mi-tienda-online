@@ -15,7 +15,7 @@ import ProductList from "../components/Products/ProductList";
 
 import styles from "./Home.module.css";
 
-export default function Home({ addToCart }) {
+export default function Home() {
   const [topProducts, setTopProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -50,19 +50,19 @@ export default function Home({ addToCart }) {
 
       <section className={styles.featuredCategories}>
         <div className={styles.categoryCard}>
-          <img src="https://picsum.photos/100?category=tech" alt="Tecnología" />
+          <img src={technology} alt="Tecnología" />
           <h3>Tecnología</h3>
         </div>
         <div className={styles.categoryCard}>
-          <img src="https://picsum.photos/100?category=fashion" alt="Moda" />
+          <img src={fashion} alt="Moda" />
           <h3>Moda</h3>
         </div>
         <div className={styles.categoryCard}>
-          <img src="https://picsum.photos/100?category=home" alt="Hogar" />
+          <img src={home} alt="Hogar" />
           <h3>Hogar</h3>
         </div>
         <div className={styles.categoryCard}>
-          <img src="https://picsum.photos/100?category=sports" alt="Deportes" />
+          <img src={food} alt="Comestibles" />
           <h3>Comestibles</h3>
         </div>
       </section>
@@ -72,7 +72,7 @@ export default function Home({ addToCart }) {
         {loading && <LoadingSpinner message="Cargando productos.." />}
         {error && <ErrorMessage message={error} />}
         {/* Lista de productos, recibe la función para agregar al carrito */}
-        <ProductList products={topProducts} addToCart={addToCart} />
+        <ProductList products={topProducts} />
       </section>
 
       <section className={styles.banners}>

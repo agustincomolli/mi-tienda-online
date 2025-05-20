@@ -26,6 +26,10 @@ body {
   cursor: pointer;
 }
 
+.btn:hover {
+  opacity: .8;
+}
+
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--text-light);
@@ -43,7 +47,7 @@ body {
   margin: 0 auto;
 }
 
-.pageContent h2{
+.pageContent h2 {
   margin-bottom: 1.25rem;
 }
 
@@ -51,6 +55,6 @@ body {
   margin: 1.15rem 0;
 }
 
-.pageContent p{
+.pageContent p {
   margin: 1rem 0;
 }
