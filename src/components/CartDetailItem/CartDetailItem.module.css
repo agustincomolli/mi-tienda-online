@@ -1,21 +1,47 @@
-.image {}
+.details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0;
+  align-items: start;
+  flex-grow: 1;
+}
 
-.details {}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.25rem;
+}
 
-.info {}
+.title {
+  width: 140px;
+  text-align: left;
+}
 
-.title {}
+.quantity {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  height: 100%;
+  gap: 1rem;
+  padding: .25rem .25rem;
+  border: 1px solid var(--border-color);
+}
 
-.price {}
+.quantityButton {
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
 
-.quantity {}
-
-.quantityButton {}
-
-.quantityValue {}
-
-.totalWrapper {}
-
-.total {}
-
-.removeButton {}
+.removeButton {
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  margin-left: .5rem;
+}

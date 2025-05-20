@@ -45,7 +45,7 @@ export default function CartDetailItem({ item }) {
   };
 
   return (
-    <div>
+    <>
       <div className={styles.image}>
         <img src={item.thumbnail} alt={item.title} height="100px" />
       </div>
@@ -66,10 +66,10 @@ export default function CartDetailItem({ item }) {
         <div className={styles.totalWrapper}>
           <span className={styles.total}>$ {item.price * item.quantity}</span>
         </div>
+        <button className={styles.removeButton} onClick={handleRemoveItem} title="Eliminar">
+          <i className='bx bx-trash'></i>
+        </button>
       </div>
-      <button className={styles.removeButton} onClick={handleRemoveItem} title="Eliminar">
-        <i className='bx bx-trash'></i>
-      </button>
-    </div>
+    </>
   );
 }
