@@ -18,7 +18,7 @@ export default function Faq() {
       </p>
       <h3>4. ¿Cuál es su política de devoluciones?</h3>
       <p>
-        Aceptamos devoluciones de productos sin usar dentro de los [Número] días de la fecha de compra. Consulte nuestra <Link to="/policies">Política de Devoluciones</Link> para obtener más detalles.
+        Aceptamos devoluciones de productos sin usar dentro de los [Número] días de la fecha de compra. Consulte nuestra <strong><Link className="link" to="/policies">Política de Devoluciones</Link></strong> para obtener más detalles.
       </p>
       <h3>5. ¿Cómo puedo contactarlos?</h3>
       <p>

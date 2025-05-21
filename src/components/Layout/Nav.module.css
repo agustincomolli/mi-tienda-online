@@ -16,15 +16,27 @@
 }
 
 .navMenuLink {
-  display: block;
+  position: relative;
+  display: inline-block;
   color: var(--text-light);
   text-decoration: none;
   padding: var(--spacing-xs) var(--spacing-lg);
   border-bottom: 1px solid transparent;
 }
 
-.navMenuLink:hover {
-  border-bottom: 1px solid var(--text-light);
+.navMenuLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-light);
+  transition: width 0.5s;
+}
+
+.navMenuLink:hover::after {
+  width: 100%;
 }
 
 .navMenuLinkIcon {

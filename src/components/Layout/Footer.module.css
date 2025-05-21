@@ -18,13 +18,26 @@
 }
 
 .footer ul li a {
+  position: relative;
+  display: inline-block;
   color: var(--text-muted);
   text-decoration: none;
   border-bottom: 1px solid transparent;
 }
 
-.footer ul li a:hover {
-  border-bottom: 1px solid var(--text-muted);
+.footer ul li a::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-muted);
+  transition: width 0.5s;
+}
+
+.footer ul li a:hover::after {
+  width: 100%;
 }
 
 .copyright {
