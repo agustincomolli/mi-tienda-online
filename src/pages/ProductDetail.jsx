@@ -70,7 +70,7 @@ export default function ProductDetail() {
 
   // Renderizado del componente
   return (
-    <>
+    <div className="pageContent">
       {/* Muestra spinner de carga si está cargando */}
       {loading && <LoadingSpinner message="Cargando productos.." />}
       {/* Muestra mensaje de error si hay error */}
@@ -95,6 +95,6 @@ export default function ProductDetail() {
           </div>
         </section>
       )}
-    </>
+    </div>
   );
 }

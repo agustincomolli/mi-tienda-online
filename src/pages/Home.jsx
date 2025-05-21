@@ -38,7 +38,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="pageContent">
       <section className={styles.hero}>
         <h2>Bienvenido a Mi Tienda Online</h2>
         <p>
@@ -90,6 +90,6 @@ export default function Home() {
           <a href="#" className="btn btn-primary">Ver Nuevos Productos</a>
         </div>
       </section>
-    </>
+    </div>
   )
 }

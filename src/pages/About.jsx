@@ -7,7 +7,7 @@ import silvia from "../assets/images/silvia.png"
 
 export default function About() {
   return (
-    <div className={styles.pageContainer}>
+    <div className="pageContent">
       <section className={styles.about}>
         <h2>Acerca de Nosotros</h2>
         <p>
