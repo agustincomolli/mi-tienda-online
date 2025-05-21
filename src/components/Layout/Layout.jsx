@@ -55,7 +55,7 @@ export default function Layout({ children, toggleCart, showCart, setShowCart }) 
             {showCart && (
                 // El ref permite detectar clics fuera de este div para cerrar el carrito
                 <div ref={cartRef}>
-                    <CartDropdown />
+                    <CartDropdown setShowCart={setShowCart} />
                 </div>
             )}
             <WhatsApp />

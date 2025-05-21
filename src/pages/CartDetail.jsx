@@ -24,7 +24,7 @@ import styles from "./CartDetail.module.css";
  */
 export default function CartDetail() {
   // Obtiene la lista de productos del carrito desde el contexto
-  const { cartItemsList } = useContext(CartContext);
+  const { cartItemsList, getSubtotal } = useContext(CartContext);
 
   // Estado para mostrar/ocultar el campo de código promocional
   const [showPromotionalCode, setShowPromotionalCode] = useState(false);
@@ -102,7 +102,7 @@ export default function CartDetail() {
             <main className={styles.cartSummarySubtotal}>
               <dl>
                 <dt>Subtotal</dt>
-                <dd className="cart-subtotal-value">$ 0,00</dd>
+                <dd className="cart-subtotal-value">$ {getSubtotal()}</dd>
               </dl>
               <dl>
                 <button className={styles.calculateShipping}>Calcular envío</button>
@@ -115,7 +115,7 @@ export default function CartDetail() {
             <footer className={styles.cartSummaryTotal}>
               <dl>
                 <dt>Total</dt>
-                <dd className="total-value">$ 0,00</dd>
+                <dd className="total-value">$ {getSubtotal()}</dd>
               </dl>
               <dl>
                 <button className={styles.finalizePurchase}>Finalizar compra</button>

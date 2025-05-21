@@ -10,6 +10,9 @@
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
 }
 
 .navMenuLink {
@@ -24,12 +27,13 @@
   border-bottom: 1px solid var(--text-light);
 }
 
-.home {
+.navMenuLinkIcon {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
-.icon {
-  color: var(--text-light);
+.logInOut {
+  position: absolute;
+  right: var(--spacing-sm);
 }

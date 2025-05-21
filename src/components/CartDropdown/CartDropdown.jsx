@@ -8,14 +8,15 @@ import CartDropdownItem from "./CartDropdownItem"
  * Componente que representa el carrito de compras.
  * Muestra los productos agregados, permite modificar cantidades y eliminar productos.
  */
-export default function CartDropdown() {
+export default function CartDropdown({setShowCart}) {
     const { cartItemsList, getSubtotal } = useContext(CartContext);
 
     // Hook para navegar
     const navigate = useNavigate();
 
     function handleClick() {
-        navigate("/cart")
+        setShowCart(false);
+        navigate("/cart");
     }
 
     // Renderiza el carrito desplegable.

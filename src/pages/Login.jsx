@@ -12,10 +12,9 @@ export default function Login() {
     const form = event.target.form || event.target.closest("form");
     const user = form.user.value;
     const password = form.password.value;
-    const successMessage = "<p>¡Bienvendio!</p>"
+    const successMessage = `<p>¡Bienvendio, <strong>${user.toUpperCase()}</strong>!</p>`
 
     if (user.toLowerCase() == "usuario" && password.toLowerCase() == "contraseña") {
-      console.log("OK")
       // Simulación de inicio de sesión exitoso
       localStorage.setItem("authToken", "miTokenSecreto");
 
@@ -27,6 +26,13 @@ export default function Login() {
       })
       // Redirigir al usuario a la página a la que intentaba acceder
       navigate(-1);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "El usuario o la contraseña son incorrectos",
+        footer: 'Revise la información e intente nuevamente'
+      });
     }
   }
 
