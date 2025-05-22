@@ -1,10 +1,20 @@
 .header {
   background-color: var(--bg-light);
   padding: var(--spacing-md) var(--spacing-lg);
+  padding-top: var(--spacing-xl);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
+  gap: var(--spacing-xl);
+  position: relative;
+}
+
+.headerRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -32,9 +42,16 @@
   }
 }
 
-
 .searchBar {
-  display: flex;
+  display: flex; /* Mostrar por defecto en mobile cuando menú está cerrado */
+  justify-content: center;
+  width: 100%;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Clase para ocultar la barra de búsqueda cuando el menú está abierto */
+.searchBarHidden {
+  display: none;
 }
 
 .searchBar input[type="text"] {
@@ -51,7 +68,8 @@
 .cart {
   justify-content: flex-end;
   cursor: pointer;
-  display: flex;
+  display: none;
+  /* Oculta el carrito en mobile */
   align-items: center;
   gap: var(--spacing-sm);
   flex: 1 0 0;
@@ -73,3 +91,48 @@
   min-width: 1.5rem;
   text-align: center;
 }
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Empuja el botón a la derecha */
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+  .header {
+    padding-top: var(--spacing-md);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+
+  .headerRow {
+    width: auto;
+    flex: 1 0 0;
+    margin-bottom: 0;
+  }
+
+  .searchBar {
+    display: flex; /* Muestra la búsqueda en desktop */
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .cart {
+    display: flex;
+  }
+
+  .hamburger {
+    /* Oculta el botón en desktop */
+    display: none;
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 1200px) {}

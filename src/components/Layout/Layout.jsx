@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import Header from "./Header";
 import Nav from "./Nav";
@@ -23,6 +23,20 @@ import styles from "./Layout.module.css";
 export default function Layout({ children, toggleCart, showCart, setShowCart }) {
     // Referencia al contenedor del carrito para detectar clics fuera de él
     const cartRef = useRef(null)
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    useEffect(() => {
+        // Bloquear scroll cuando el menú hamburguesa está abierto
+        if (menuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        // Limpiar al desmontar
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [menuOpen]);
 
     useEffect(() => {
         // Si el carrito no está visible, no hace falta agregar el listener
@@ -43,8 +57,8 @@ export default function Layout({ children, toggleCart, showCart, setShowCart }) 
     return (
         <div className={styles.layoutContainer}>
             {/* Header recibe funciones y datos como props */}
-            <Header toggleCart={toggleCart} />
-            <Nav />
+            <Header toggleCart={toggleCart} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+            <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Main>
                 {/* Renderiza el contenido principal de la página actual */}
                 {children}
