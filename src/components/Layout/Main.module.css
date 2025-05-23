@@ -7,14 +7,16 @@
 @media (min-width: 768px) {
   .main {
     padding: var(--spacing-lg);
+    margin: 0 5%;
   }
 
 }
 
 /* Pantallas grandes */
-@media (min-width: 1200px) {
+@media (min-width: 1025px) {
   .main {
     padding: var(--spacing-xl);
+    margin: 0 10%;
   }
 
 }

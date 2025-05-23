@@ -48,9 +48,7 @@ body {
 }
 
 .pageContent {
-  padding: 1rem;
   line-height: 1.5;
-  margin: 0;
 }
 
 .pageContent h2 {
@@ -86,22 +84,4 @@ body {
 
 .link:hover::after {
   width: 100%;
-}
-
-/* Tablets y pantallas medianas */
-@media (min-width: 768px) {
-  .pageContent {
-    padding: 2rem;
-    margin: 0 5%;
-  }
-
-}
-
-/* Pantallas grandes */
-@media (min-width: 1200px) {
-  .pageContent {
-    padding: 2.5rem;
-    margin: 0 10%;
-  }
-
 }
