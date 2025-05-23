@@ -73,7 +73,7 @@
 @media (min-width: 768px) {
   .loginContent {
     min-height: 70vh;
-    padding: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
   }
 
   .loginContent h2 {
