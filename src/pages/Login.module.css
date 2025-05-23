@@ -78,7 +78,7 @@
 
   .loginContent h2 {
     font-size: 2.2rem;
-    margin-bottom: calc(var(--spacing-xl) * 1.5);
+    margin-bottom: var(--spacing-xl);
   }
 
   .loginForm {

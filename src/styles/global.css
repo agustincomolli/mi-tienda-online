@@ -13,8 +13,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-family);
-  /* Prevenir desbordamiento */
-  max-width: 100%;
 }
 
 /* Estilos base del cuerpo */

@@ -24,12 +24,17 @@
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px 0 10px 0;
     position: absolute;
     z-index: 1;
     bottom: 125%;
     left: 50%;
     margin-left: -60px;
+    /* Sombra sutil */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    /* Para animación suave */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .tooltip .tooltiptext::after {
@@ -45,6 +50,10 @@
 
   .tooltip:hover .tooltiptext {
     visibility: visible;
+    /* Animación suave de aparición */
+    opacity: 1;
+    /* Pequeño movimiento hacia arriba */
+    transform: translateY(-5px);
   }
 
   .whatsappFloat {
@@ -70,6 +79,11 @@
   .whatsappFloat:hover {
     background-color: #128C7E;
     transform: scale(1.1);
+  }
+
+  /* Pausar animación bounce cuando se hace hover */
+  .whatsappFloat:hover.bounce {
+    animation-play-state: paused;
   }
 
   .bounce {
