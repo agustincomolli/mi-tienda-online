@@ -41,7 +41,7 @@ export default function Nav({ menuOpen, setMenuOpen }) {
                 <li>
                     <Link className={styles.navMenuLink} to="/contact" onClick={handleMenuItemClick}>Contacto</Link>
                 </li>
-                <li>
+                <li className={styles.onlyMobile}>
                     <Link className={styles.navMenuLink} to="/cart" onClick={handleMenuItemClick}>Carrito</Link>
                 </li>
                 {isLoggedIn ? (

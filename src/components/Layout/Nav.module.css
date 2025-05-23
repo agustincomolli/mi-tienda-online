@@ -64,6 +64,10 @@
   margin-top: 0;
 }
 
+.onlyMobile {
+  display: block;
+}
+
 /* Tablets y pantallas medianas (768px+) */
 @media (min-width: 768px) {
   .nav {
@@ -131,14 +135,18 @@
     gap: var(--spacing-sm);
   }
 
-.navMenuLinkIcon svg {
-  width: 18px;
-  height: 18px;
-}
+  .navMenuLinkIcon svg {
+    width: 18px;
+    height: 18px;
+  }
 
   .logInOut {
     position: absolute;
     right: var(--spacing-sm);
     margin-top: 0;
+  }
+
+  .onlyMobile {
+    display: none;
   }
 }
