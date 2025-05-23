@@ -1,3 +1,4 @@
+/* Estilos base (Mobile First) */
 .about {
   padding: 1.25rem;
   text-align: center;
@@ -26,21 +27,30 @@
   margin-bottom: var(--spacing-sm);
 }
 
+.history p {
+  text-align: justify;
+  /* word-break: Indica si se pueden partir palabras de forma natural. */
+  word-break: break-word;
+  /* hyphens: Indica si se debe dividir las palabras por guiones. */
+  hyphens: auto;}
+
+/* Mobile: apilar misión y visión */
 .missionVision {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
   margin-bottom: 2rem;
   padding: 1.25rem;
   text-align: center;
 }
 
 .missionVision div {
-  flex: 1;
+  width: 100%;
   padding: 1.25rem;
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-lg);
-  margin: .725rem;
-
+  margin: 0.725rem 0;
 }
 
 .missionVision h4 {
@@ -60,13 +70,13 @@
 
 .teamMembers {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
   margin-bottom: 2rem;
 }
 
 .member {
-  flex: 1;
   text-align: center;
   margin: var(--spacing-sm);
   min-width: 200px;
@@ -79,7 +89,7 @@
   margin-bottom: var(--spacing-sm);
 }
 
-.member h3{
+.member h3 {
   font-size: 1.2rem;
   margin-bottom: var(--spacing-xs);
 }
@@ -87,4 +97,23 @@
 .member p {
   font-size: .9rem;
   color: var(--text-secondary);
+}
+
+/* Pantallas grandes */
+@media (min-width: 768px) {
+  .missionVision {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .missionVision div {
+    margin: 0.725rem;
+    width: auto;
+  }
+
+  .teamMembers {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
 }

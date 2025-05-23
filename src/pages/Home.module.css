@@ -1,9 +1,10 @@
+/* Estilos base (Mobile First) */
 .hero {
   background-color: var(--bg-light);
   text-align: center;
   padding: 2.5rem 1.25rem;
   border-radius: var(--border-radius);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 .hero h2 {
@@ -24,14 +25,22 @@
   display: inline-block;
 }
 
+/* Las categorías una debajo de otra en mobile */
 .featuredCategories {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 }
 
 .categoryCard {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .categoryCard img {
@@ -39,6 +48,10 @@
   height: auto;
   border-radius: 50%;
   margin-bottom: var(--spacing-sm);
+}
+
+.categoryCard h3 {
+  margin: 0;
 }
 
 .featuredProducts {
@@ -52,13 +65,12 @@
 
 .banners {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
 }
 
 .banner {
-  flex: 1;
   text-align: center;
   padding: var(--spacing-lg);
   background-color: var(--bg-light);
@@ -66,12 +78,40 @@
 }
 
 .banner img {
-  /* max-width: 100%; */
-  width: 400px;
+  width: 100%;
+  max-width: 100%;
   height: auto;
   margin-bottom: var(--spacing-sm);
+  /* Evita espacios en blanco */
+  display: block;
 }
 
 .banner p {
-  margin-bottom: var(--spacing-lg)
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 768px) {
+  .featuredCategories {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .banners {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .banner {
+    /* Distribución equitativa */
+    flex: 1;
+    /* Controlar ancho máximo */
+    max-width: calc(50% - var(--spacing-md));
+    padding: var(--spacing-lg);
+  }
+
+  .banner img {
+    width: 100%;
+    width: 400px;
+  }
 }

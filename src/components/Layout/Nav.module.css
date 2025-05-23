@@ -17,7 +17,7 @@
 }
 
 .open {
-  height: calc(100vh + 77px);
+  height: calc(100vh - 76px);
   opacity: 1;
   pointer-events: auto;
 }
@@ -81,6 +81,7 @@
     pointer-events: auto;
     overflow: visible;
     transition: none;
+    z-index: initial;
   }
 
   .open {

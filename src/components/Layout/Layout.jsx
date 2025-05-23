@@ -26,15 +26,16 @@ export default function Layout({ children, toggleCart, showCart, setShowCart }) 
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
+        const noScrollClass = styles.noScroll;
         // Bloquear scroll cuando el menú hamburguesa está abierto
         if (menuOpen) {
-            document.body.style.overflow = "hidden";
+            document.body.classList.add(noScrollClass);
         } else {
-            document.body.style.overflow = "";
+            document.body.classList.remove(noScrollClass);
         }
         // Limpiar al desmontar
         return () => {
-            document.body.style.overflow = "";
+            document.body.classList.remove(noScrollClass);
         };
     }, [menuOpen]);
 

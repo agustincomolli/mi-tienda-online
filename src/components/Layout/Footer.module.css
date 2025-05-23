@@ -1,20 +1,24 @@
+/* Estilos base (Mobile First) */
 .footer {
   background-color: var(--bg-dark);
   color: var(--text-light);
   padding: 20px;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
 }
 
 .footer h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
 }
 
 .footer ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .footer ul li a {
@@ -25,7 +29,7 @@
   border-bottom: 1px solid transparent;
 }
 
-.footer ul li a::after{
+.footer ul li a::after {
   content: '';
   position: absolute;
   left: 0;
@@ -50,6 +54,7 @@
 .socialNetworks {
   display: flex;
   gap: var(--spacing-md);
+  justify-content: center;
 }
 
 .socialNetworks a {
@@ -58,6 +63,21 @@
   font-size: 1.5rem;
 }
 
-.socialNetworks a:hover{
+.socialNetworks a:hover {
   color: var(--text-muted);
+}
+
+/* Estilos para pantallas grandes (Desktop) */
+@media (min-width: 768px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer h4 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+  }
 }

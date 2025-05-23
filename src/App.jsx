@@ -17,7 +17,6 @@ import Terms from "./pages/Terms";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import Layout from "./components/Layout/Layout";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
-import Main from "./components/Layout/Main";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 import 'boxicons/css/boxicons.min.css';
@@ -130,17 +129,12 @@ function App() {
         setShowCart={setShowCart}
       >
         <Routes>
-          <Route path="/" element={<Main><Home /></Main>} />
-          <Route path="/products"
-            element={
-              <Main>
-                {getProductsComponent({ loading, error, products })}
-              </Main>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={getProductsComponent({ loading, error, products })} />
+          {/* Ruta dinámica */}
           <Route path="/products/:id" element={<ProductDetail />} />
-          {/* Rutas estáticas para páginas informativas */}
           <Route path="/about" element={<About />} />
+          {/* Ruta protegida, hay que iniciar sesión para acceder */}
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<CartDetail />} />
           </Route>

@@ -1,4 +1,20 @@
 .main {
   flex-grow: 1;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xs);
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+  .main {
+    padding: var(--spacing-lg);
+  }
+
+}
+
+/* Pantallas grandes */
+@media (min-width: 1200px) {
+  .main {
+    padding: var(--spacing-xl);
+  }
+
 }
