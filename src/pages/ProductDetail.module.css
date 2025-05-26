@@ -57,6 +57,12 @@
   width: 100%;
 }
 
+.star {
+  color: #ffc107;
+  font-size: 1.4rem;
+  margin-right: 2px;
+}
+
 /* Tablets y pantallas medianas */
 @media (min-width: 768px) {
   .productDetail {

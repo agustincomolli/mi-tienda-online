@@ -13,7 +13,7 @@ import styles from "./ProductDetail.module.css"
  * Obtiene el producto por su id desde la API y permite agregarlo al carrito.
  */
 export default function ProductDetail() {
-  const {addToCart} = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   // Obtiene el parámetro 'id' de la URL
   const { id } = useParams();
 
@@ -68,6 +68,35 @@ export default function ProductDetail() {
     addToCart(product)
   };
 
+  /**
+   * Genera un arreglo de íconos de estrellas para representar visualmente una calificación.
+   *
+   * @param {number} rating - Calificación numérica (puede incluir decimales) entre 0 y 5.
+   * @returns {JSX.Element[]} Arreglo de elementos JSX que representan estrellas llenas, medias y vacías.
+   */
+  function renderStars(rating) {
+    const maxStars = 5;
+    const filledStars = Math.floor(rating);
+    const halfStar = rating - filledStars >= 0.5;
+    const emptyStars = maxStars - filledStars - (halfStar ? 1 : 0);
+
+    const stars = [];
+
+    for (let i = 0; i < filledStars; i++) {
+      stars.push(<i key={`filled-${i}`} className={`bx bxs-star ${styles.star}`}></i>);
+    }
+
+    if (halfStar) {
+      stars.push(<i key="half" className={`bx bxs-star-half ${styles.star}`}></i>);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<i key={`empty-${i}`} className={`bx bx-star ${styles.star}`}></i>);
+    }
+
+    return stars;
+  }
+
   // Renderizado del componente
   return (
     <div className="pageContent">
@@ -88,7 +117,10 @@ export default function ProductDetail() {
               {product.category && toTitleCase(product.category)}
             </p>
             <p className="brand"><strong>Marca:</strong> {product.brand}</p>
-            <p className="rating"><strong>Calificación:</strong> {product.rating}</p>
+            <p className="rating">
+              <strong>Calificación:</strong> {product.rating}{" "}
+              <span>{renderStars(product.rating)}</span>
+            </p>
             <div className={styles.ButtonsWrapper}>
               <button className="btn btn-success" onClick={handleClick}>Agregar al carrito</button>
               <Link className="btn btn-primary" to="/">Volver al Inicio</Link>
