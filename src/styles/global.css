@@ -91,3 +91,12 @@ body {
   overflow: hidden !important;
   height: 100vh !important;
 }
+
+/* Estilos personalizados para SweetAlert2 */
+.swal-btn-confirm {
+  background-color: var(--color-primary) !important;
+}
+
+.swal-btn-cancel {
+  background-color: var(--color-danger) !important;
+}

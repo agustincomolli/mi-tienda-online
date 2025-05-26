@@ -4,6 +4,8 @@
   --color-primary: #007bff;
   /* Botones de acción/confirmación */
   --color-success: #28a745;
+  /* Botones de cancelar o eliminar */
+  --color-danger:#dc3545;
 
   /* Colores de fondo */
   /* Header */

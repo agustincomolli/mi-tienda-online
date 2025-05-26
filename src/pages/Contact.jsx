@@ -12,6 +12,9 @@ export default function Contact() {
       html: message,
       icon: "success",
       confirmButtonText: "Continuar",
+      customClass: {
+        confirmButton: 'swal-btn-confirm',
+      },
       footer: "<p>Muchas gracias</p>"
     })
   };

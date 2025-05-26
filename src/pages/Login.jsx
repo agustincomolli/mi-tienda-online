@@ -33,6 +33,9 @@ export default function Login() {
         html: successMessage,
         icon: "success",
         confirmButtonText: "Continuar",
+        customClass: {
+          confirmButton: 'swal-btn-confirm',
+        },
         timer: 4000,
         timerProgressBar: true,
         // Esta línea previene el salto
@@ -48,6 +51,9 @@ export default function Login() {
         text: "El usuario o la contraseña son incorrectos",
         footer: 'Revise la información e intente nuevamente',
         confirmButtonText: "Reintentar",
+        customClass: {
+          confirmButton: 'swal-btn-cancel',
+        },
         // Esta línea previene el salto
         scrollbarPadding: false
       });
@@ -55,39 +61,39 @@ export default function Login() {
   }
 
   return (
-      <div className={styles.loginContent}>
-        <h2>Iniciar sesión</h2>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Usuario"
-            name="user"
-            required
-            autoComplete="username"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            required
-            autoComplete="current-password"
-          />
-          <button
-            className={`btn btn-primary ${styles.loginButton}`}
-            type="submit"
-          >
-            Iniciar sesión
-          </button>
-        </form>
-        <div className={styles.loginHelp}>
-          <p>
-            <small>
-              <strong>Credenciales de prueba:</strong><br />
-              Usuario: usuario<br />
-              Contraseña: contraseña
-            </small>
-          </p>
-        </div>
+    <div className={styles.loginContent}>
+      <h2>Iniciar sesión</h2>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Usuario"
+          name="user"
+          required
+          autoComplete="username"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+          autoComplete="current-password"
+        />
+        <button
+          className={`btn btn-primary ${styles.loginButton}`}
+          type="submit"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+      <div className={styles.loginHelp}>
+        <p>
+          <small>
+            <strong>Credenciales de prueba:</strong><br />
+            Usuario: usuario<br />
+            Contraseña: contraseña
+          </small>
+        </p>
       </div>
+    </div>
   );
 }
