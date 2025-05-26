@@ -88,6 +88,7 @@ export default function ProductDetail() {
               {product.category && toTitleCase(product.category)}
             </p>
             <p className="brand"><strong>Marca:</strong> {product.brand}</p>
+            <p className="rating"><strong>Calificación:</strong> {product.rating}</p>
             <div className={styles.ButtonsWrapper}>
               <button className="btn btn-success" onClick={handleClick}>Agregar al carrito</button>
               <Link className="btn btn-primary" to="/">Volver al Inicio</Link>

@@ -26,7 +26,7 @@ export default function Layout({ children, toggleCart, showCart, setShowCart }) 
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        const noScrollClass = styles.noScroll;
+        const noScrollClass = "noScroll";
         // Bloquear scroll cuando el menú hamburguesa está abierto
         if (menuOpen) {
             document.body.classList.add(noScrollClass);

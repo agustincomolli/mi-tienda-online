@@ -85,3 +85,8 @@ body {
 .link:hover::after {
   width: 100%;
 }
+
+.noScroll {
+  overflow: hidden !important;
+  height: 100vh !important;
+}

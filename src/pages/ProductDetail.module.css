@@ -1,48 +1,48 @@
+/* Estilos base (Mobile First) */
 .productDetail {
   display: flex;
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-lg);
+  flex-direction: column;
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
   background-color: var(--bg-light);
   border-radius: var(--border-radius-lg);
-  /* Limitamos el ancho del contenedor principal */
-  max-width: 800px;
-  margin-left: auto;
-  /* Centramos el contenedor en la página */
-  margin-right: auto;
+  width: 100%;
+  gap: var(--spacing-md);
 }
 
 .productDetail img {
-  /* La imagen no debe exceder el ancho de su contenedor */
-  max-width: 50%;
+  width: 100%;
+  max-width: 100%;
   height: auto;
-  /* Evita que se deforme */
   object-fit: contain;
   border-radius: var(--border-radius-lg);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 0;
 }
 
 .productInfo {
-  width: 50%;
+  width: 100%;
   text-align: left;
 }
 
 .productInfo h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: var(--spacing-sm);
   color: var(--text-dark);
 }
 
-.productInfo p{
+.productInfo p {
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: var(--spacing-lg);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
   text-align: justify;
 }
 
-.ButtonsWrapper{
+.ButtonsWrapper {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-lg);
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
 }
 
 .ButtonsWrapper a {
@@ -50,6 +50,51 @@
   color: var(--text-light);
 }
 
-.ButtonsWrapper button {
+.ButtonsWrapper button,
+.ButtonsWrapper a {
   font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+  .productDetail {
+    flex-direction: row;
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: var(--spacing-lg);
+  }
+
+  .productDetail img {
+    max-width: 50%;
+    width: 50%;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .productInfo {
+    width: 50%;
+  }
+
+  .productInfo h2 {
+    font-size: 2rem;
+  }
+
+  .productInfo p {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .ButtonsWrapper {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-lg);
+  }
+
+  .ButtonsWrapper button,
+  .ButtonsWrapper a {
+    width: auto;
+  }
 }
