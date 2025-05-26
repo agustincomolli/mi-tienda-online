@@ -13,6 +13,7 @@ import Policies from "./pages/Policies";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Terms from "./pages/Terms";
+import Admin from "./pages/Admin";
 
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import Layout from "./components/Layout/Layout";
@@ -137,6 +138,7 @@ function App() {
           {/* Ruta protegida, hay que iniciar sesión para acceder */}
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<CartDetail />} />
+            <Route path="/admin" element={<Admin />}></Route>
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
