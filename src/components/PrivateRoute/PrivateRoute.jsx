@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom";
-
-const isAuthenticated = () => {
-  return localStorage.getItem("authToken") !== null;
-};
+import { useContext } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function PrivateRoute() {
-  return isAuthenticated() ? <Outlet /> : <Navigate to="/login" />;
+  const { isAuthenticated } = useContext(AuthContext);
+  const location = useLocation();
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" state={{ from: location }} replace />;
 }

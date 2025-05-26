@@ -100,3 +100,8 @@ body {
 .swal-btn-cancel {
   background-color: var(--color-danger) !important;
 }
+
+.swal-btn-confirm:hover,
+.swal-btn-cancel:hover {
+  opacity: .8;
+}

@@ -1,18 +1,24 @@
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useContext } from 'react';
+import { AuthContext } from "../context/AuthContext";
 import styles from "./Login.module.css";
 
 export default function Login() {
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  // Obtenemos la función login del contexto
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  // Si alguien fue redirigido a /login desde una ruta protegida, guardamos esa ruta
+  const from = location.state?.from?.pathname || "/";
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const user = formData.get('user').trim();
-    const password = formData.get('password');
 
     // Validación básica
-    if (!user || !password) {
+    if (!username || !password) {
       Swal.fire({
         icon: "warning",
         title: "Campos requeridos",
@@ -22,11 +28,13 @@ export default function Login() {
       return;
     }
 
-    const successMessage = `<p>¡Bienvenido, <strong>${user.toUpperCase()}</strong>!</p>`;
+    const successMessage = `<p>¡Bienvenido, <strong>${username.toUpperCase()}</strong>!</p>`;
 
-    if (user.toLowerCase() === "usuario" && password.toLowerCase() === "contraseña") {
+    if (username.toLowerCase() === "usuario" && password.toLowerCase() === "contraseña") {
       // Simulación de inicio de sesión exitoso
-      localStorage.setItem("authToken", "miTokenSecreto");
+      const token = `fake-jwt-token-${username}`;
+      const userData = { username: username.toLowerCase(), role: "user" };
+      login(token, userData);
 
       Swal.fire({
         title: "Inicio de sesión exitoso",
@@ -41,8 +49,8 @@ export default function Login() {
         // Esta línea previene el salto
         scrollbarPadding: false
       }).then(() => {
-        // Redirigir al usuario a la página anterior
-        navigate(-1);
+        // Redirigir al usuario a donde quería ir
+        navigate(from, { replace: true });
       });
     } else {
       Swal.fire({
@@ -70,6 +78,7 @@ export default function Login() {
           name="user"
           required
           autoComplete="username"
+          onChange={(e) => { setUsername(e.target.value) }}
         />
         <input
           type="password"
@@ -77,6 +86,7 @@ export default function Login() {
           placeholder="Contraseña"
           required
           autoComplete="current-password"
+          onChange={(e) => { setPassword(e.target.value) }}
         />
         <button
           className={`btn btn-primary ${styles.loginButton}`}
