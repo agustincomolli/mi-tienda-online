@@ -86,6 +86,7 @@ body {
   width: 100%;
 }
 
+/* Estilo para que no se pueda hacer scroll cuando el menú hamburguesa esté abierto */
 .noScroll {
   overflow: hidden !important;
   height: 100vh !important;
