@@ -72,6 +72,14 @@ mi-tienda-online/
 - [Boxicons](https://boxicons.com/) (íconos)
 - [ESLint](https://eslint.org/) (desarrollo)
 
+## Configuración del Entorno
+
+Para ejecutar el proyecto, necesitarás configurar tus variables de entorno de Firebase.
+
+1. Renombra el archivo `.env.example` a `.env` en la raíz del proyecto:
+   ```bash
+   cp .env.example .env
+
 ## Créditos
 
 Proyecto realizado por **Agustín Comolli** para el curso Talento Tech.

@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Terms from "./pages/Terms";
 import Admin from "./pages/Admin";
+import Register from "./pages/Register";
 
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import Layout from "./components/Layout/Layout";
@@ -143,6 +144,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<PageNotFound />} />

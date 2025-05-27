@@ -32,7 +32,7 @@
 }
 
 .loginForm input {
-  font-size: 1rem;
+  font-size: var(--font-size-sm);
   padding: var(--spacing-md);
   border: 1px solid var(--border-color-medium);
   border-radius: var(--border-radius);
@@ -88,12 +88,12 @@
   }
 
   .loginForm input {
-    padding: var(--spacing-lg);
-    font-size: 1.1rem;
+    padding: var(--spacing-md);
+    font-size: 1rem;
   }
 
   .loginButton {
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-sm);
     font-size: 1.1rem;
   }
 }
@@ -112,12 +112,28 @@
 .loginHelp p {
   margin: 0;
   color: var(--text-secondary);
+  font-size: var(--font-size-md);
 }
 
 .loginHelp small {
   font-size: var(--font-size-sm);
   line-height: 1.4;
+  color: var(--text-secondary);
 }
+
+/* Estilo para los enlaces dentro de loginHelp (para el "Regístrate aquí") */
+.loginHelp a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.loginHelp a:hover {
+  /* Un color más oscuro o el color de hover que prefieras */
+  color: var(--text-dark);
+}
+
 
 /* Pantallas grandes */
 @media (min-width: 1025px) {

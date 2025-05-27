@@ -1,0 +1,115 @@
+/* Estilos base (Mobile First) */
+.registerContent {
+  margin-bottom: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: var(--spacing-md);
+}
+
+.registerContent h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-sm);
+  background-color: var(--bg-white);
+}
+
+.registerForm input {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color-medium);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registerForm input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.registerForm input::placeholder {
+  color: var(--text-secondary);
+}
+
+.registerButton {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  margin-top: var(--spacing-sm);
+}
+
+.registerButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.registerButton:active {
+  transform: translateY(0);
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+  .registerContent {
+    min-height: 70vh;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .registerContent h2 {
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .registerForm {
+    max-width: 450px;
+    padding: calc(var(--spacing-xl) * 1.5);
+    gap: var(--spacing-xl);
+  }
+
+  .registerForm input {
+    padding: var(--spacing-md);
+    font-size: 1rem;
+  }
+
+  .registerButton {
+    padding: var(--spacing-md) var(--spacing-sm);
+    font-size: 1.1rem;
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 1025px) {
+  .registerContent {
+    min-height: 75vh;
+  }
+
+  .registerContent h2 {
+    font-size: 2.5rem;
+  }
+
+  .registerForm {
+    max-width: 500px;
+    padding: calc(var(--spacing-xl) * 2);
+  }
+}

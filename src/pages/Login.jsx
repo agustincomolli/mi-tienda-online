@@ -1,24 +1,24 @@
 import Swal from 'sweetalert2';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { AuthContext } from "../context/AuthContext";
 import styles from "./Login.module.css";
 
 export default function Login() {
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   // Obtenemos la función login del contexto
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext); // Obtenemos la función login de Firebase
   const navigate = useNavigate();
   const location = useLocation();
   // Si alguien fue redirigido a /login desde una ruta protegida, guardamos esa ruta
   const from = location.state?.from?.pathname || "/";
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     // Validación básica
-    if (!username || !password) {
+    if (!email || !password) {
       Swal.fire({
         icon: "warning",
         title: "Campos requeridos",
@@ -28,42 +28,59 @@ export default function Login() {
       return;
     }
 
-    const successMessage = `<p>¡Bienvenido, <strong>${username.toUpperCase()}</strong>!</p>`;
+    try {
+      const result = await login(email, password); // Llamamos a la función login del contexto
 
-    if (username.toLowerCase() === "usuario" && password.toLowerCase() === "contraseña") {
-      // Simulación de inicio de sesión exitoso
-      const token = `fake-jwt-token-${username}`;
-      const userData = { username: username.toLowerCase(), role: "user" };
-      login(token, userData);
+      if (result.success) {
+        await Swal.fire({
+          title: "Inicio de sesión exitoso",
+          html: `<p>¡Bienvenido, <strong>${result.user.email}</strong>!</p>`,
+          icon: "success",
+          confirmButtonText: "Continuar",
+          customClass: {
+            confirmButton: 'swal-btn-confirm',
+          },
+          timer: 4000,
+          timerProgressBar: true,
+          scrollbarPadding: false
+        });
 
-      Swal.fire({
-        title: "Inicio de sesión exitoso",
-        html: successMessage,
-        icon: "success",
-        confirmButtonText: "Continuar",
-        customClass: {
-          confirmButton: 'swal-btn-confirm',
-        },
-        timer: 4000,
-        timerProgressBar: true,
-        // Esta línea previene el salto
-        scrollbarPadding: false
-      }).then(() => {
-        // Redirigir al usuario a donde quería ir
         navigate(from, { replace: true });
-      });
-    } else {
-      Swal.fire({
+
+      } else {
+        // Manejar errores específicos de Firebase Authentication
+        let errorMessage = "Credenciales incorrectas. Verifique su correo y contraseña.";
+
+        if (result.error.includes("auth/invalid-credential")) {
+          errorMessage = "Correo electrónico o contraseña incorrectos.";
+        } else if (result.error.includes("auth/user-not-found")) {
+          errorMessage = "No hay ningún usuario registrado con este correo electrónico.";
+        } else if (result.error.includes("auth/wrong-password")) {
+          errorMessage = "La contraseña es incorrecta.";
+        } else if (result.error.includes("auth/invalid-email")) {
+          errorMessage = "El formato del correo electrónico es inválido.";
+        }
+
+        await Swal.fire({
+          icon: "error",
+          title: "Error de inicio de sesión",
+          text: errorMessage,
+          footer: 'Revise la información e intente nuevamente',
+          confirmButtonText: "Reintentar",
+          customClass: {
+            confirmButton: 'swal-btn-cancel',
+          },
+          scrollbarPadding: false
+        });
+      }
+    } catch (error) {
+      console.error("Error inesperado durante el inicio de sesión:", error);
+
+      await Swal.fire({
         icon: "error",
-        title: "Credenciales incorrectas",
-        text: "El usuario o la contraseña son incorrectos",
-        footer: 'Revise la información e intente nuevamente',
-        confirmButtonText: "Reintentar",
-        customClass: {
-          confirmButton: 'swal-btn-cancel',
-        },
-        // Esta línea previene el salto
-        scrollbarPadding: false
+        title: "Error inesperado",
+        text: "Hubo un problema al intentar iniciar sesión. Por favor, intente de nuevo.",
+        confirmButtonText: "Reintentar"
       });
     }
   }
@@ -73,12 +90,13 @@ export default function Login() {
       <h2>Iniciar sesión</h2>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <input
-          type="text"
-          placeholder="Usuario"
-          name="user"
+          type="email" // Cambiado a type="email"
+          placeholder="Correo electrónico"
+          name="email"
           required
-          autoComplete="username"
-          onChange={(e) => { setUsername(e.target.value) }}
+          autoComplete="email" // Cambiado a email
+          onChange={(e) => { setEmail(e.target.value) }}
+          value={email} // Controlar el input
         />
         <input
           type="password"
@@ -87,6 +105,7 @@ export default function Login() {
           required
           autoComplete="current-password"
           onChange={(e) => { setPassword(e.target.value) }}
+          value={password} // Controlar el input
         />
         <button
           className={`btn btn-primary ${styles.loginButton}`}
@@ -96,11 +115,12 @@ export default function Login() {
         </button>
       </form>
       <div className={styles.loginHelp}>
+        <p>¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
         <p>
           <small>
-            <strong>Credenciales de prueba:</strong><br />
-            Usuario: usuario<br />
-            Contraseña: contraseña
+            <strong>Credenciales de prueba (registra uno nuevo):</strong><br />
+            Email: prueba@example.com<br />
+            Contraseña: 123456
           </small>
         </p>
       </div>
