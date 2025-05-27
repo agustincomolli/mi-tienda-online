@@ -34,3 +34,24 @@ export async function fetchProductById(id) {
   if (!response.ok) throw new Error("Producto no encontrado");
   return response.json();
 }
+
+/**
+ * Busca productos por término o categoría.
+ * @param {Object} params - Parámetros de búsqueda.
+ * @param {string} [params.q] - Término de búsqueda.
+ * @param {string} [params.category] - Categoría.
+ * @returns {Promise<Object>} Productos filtrados.
+ */
+export async function fetchProductsByQuery({ q = "", category = "" } = {}) {
+  let url = "https://dummyjson.com/products";
+  if (category) {
+    url = `https://dummyjson.com/products/category/${encodeURIComponent(category)}`;
+    if (q) url += `?q=${encodeURIComponent(q)}`;
+  } else if (q) {
+    url += `/search?q=${encodeURIComponent(q)}`;
+  }
+  const response = await fetch(url);
+  if (!response.ok) throw new Error("Error al buscar productos");
+  return response.json();
+}
+

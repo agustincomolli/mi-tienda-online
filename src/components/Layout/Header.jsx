@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
 import logo from "../../assets/icons/react.svg"
@@ -15,6 +16,15 @@ import styles from "./Header.module.css"
  */
 export default function Header({ toggleCart, menuOpen, setMenuOpen }) {
     const { getTotalItemCount } = useContext(CartContext);
+    const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate();
+
+    function handleSearch(event) {
+        event.preventDefault();
+        if (searchTerm.trim()) {
+            navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+        }
+    }
 
     return (
         <header className={styles.header}>
@@ -31,10 +41,15 @@ export default function Header({ toggleCart, menuOpen, setMenuOpen }) {
                     <i className={`bx ${menuOpen ? "bx-x" : "bx-menu"}`}></i>
                 </button>
             </div>
-            <div className={`${styles.searchBar} ${menuOpen ? styles.searchBarHidden : ''}`}>
-                <input type="text" placeholder="Buscar productos..." />
+            <form onSubmit={handleSearch} className={`${styles.searchBar} ${menuOpen ? styles.searchBarHidden : ''}`}>
+                <input
+                    type="text"
+                    placeholder="Buscar productos..."
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                />
                 <button className="btn btn-primary">Buscar</button>
-            </div>
+            </form>
             <div className={styles.cart} onClick={toggleCart} title="Carrito de compras">
                 <img className={styles.cartImage} src={cartImage} alt="Carrito" />
                 <span className={styles.cartItemCount}>{getTotalItemCount()}</span>

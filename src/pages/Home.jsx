@@ -21,7 +21,7 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getTopProducts = async () => {
+    async function getTopProducts() {
       try {
         setLoading(true);
         const data = await fetchFeaturedProducts();
@@ -49,22 +49,22 @@ export default function Home() {
       </section>
 
       <section className={styles.featuredCategories}>
-        <div className={styles.categoryCard}>
+        <Link to="/search?category=smartphones" className={styles.categoryCard} title="Ver productos de esta categoría">
           <img src={technology} alt="Tecnología" />
           <h3>Tecnología</h3>
-        </div>
-        <div className={styles.categoryCard}>
+        </Link>
+        <Link to="/search?category=mens-shirts" className={styles.categoryCard} title="Ver productos de esta categoría">
           <img src={fashion} alt="Moda" />
           <h3>Moda</h3>
-        </div>
-        <div className={styles.categoryCard}>
+        </Link>
+        <Link to="/search?category=furniture" className={styles.categoryCard} title="Ver productos de esta categoría">
           <img src={home} alt="Hogar" />
           <h3>Hogar</h3>
-        </div>
-        <div className={styles.categoryCard}>
+        </Link>
+        <Link to="/search?category=groceries" className={styles.categoryCard} title="Ver productos de esta categoría">
           <img src={food} alt="Comestibles" />
           <h3>Comestibles</h3>
-        </div>
+        </Link>
       </section>
 
       <section className={styles.featuredProducts}>

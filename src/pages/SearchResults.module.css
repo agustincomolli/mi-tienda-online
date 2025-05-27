@@ -1,0 +1,10 @@
+.message {
+  font-size: var(--font-size-lg);
+  text-align: center;
+  color: var(--color-danger);
+  font-weight: bold;
+}
+
+.title {
+  margin-bottom: 15px;
+}

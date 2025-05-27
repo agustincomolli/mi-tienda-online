@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import Policies from "./pages/Policies";
 import Products from "./pages/Products";
+import SearchResults from "./pages/SearchResults";
 import ProductDetail from "./pages/ProductDetail";
 import Terms from "./pages/Terms";
 import Admin from "./pages/Admin";
@@ -146,6 +147,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/policies" element={<Policies />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

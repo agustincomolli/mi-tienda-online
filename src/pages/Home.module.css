@@ -41,6 +41,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.categoryCard:hover {
+  opacity: .8;
 }
 
 .categoryCard img {

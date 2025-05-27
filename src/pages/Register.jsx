@@ -55,7 +55,6 @@ export default function Register() {
       return;
     }
 
-
     try {
       // Llamamos a la función signup del contexto
       const result = await signup(email, password);
