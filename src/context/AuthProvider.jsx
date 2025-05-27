@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { AuthContext } from "./AuthContext";
 import { auth, loginUser, registerUser, logoutUser } from "../auth/firebase"; // Importamos las funciones de Firebase
 import { onAuthStateChanged } from "firebase/auth"; // Importamos para escuchar cambios en el estado de autenticación
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null); // Almacena el usuario autenticado
@@ -65,7 +66,7 @@ export function AuthProvider({ children }) {
 
   // Mientras la autenticación inicial esté cargando, podrías mostrar un spinner
   if (loadingAuth) {
-    return <div>Cargando autenticación...</div>; // Puedes reemplazar esto con un componente de spinner
+    return <LoadingSpinner message="Cargando autenticación..."/>; // Puedes reemplazar esto con un componente de spinner
   }
 
   return (
