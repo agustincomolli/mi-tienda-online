@@ -81,13 +81,13 @@ export default function Home() {
           <h3>Ofertas de Temporada</h3>
           <p>¡No te pierdas nuestras increíbles ofertas de temporada! Descuentos de hasta el 50% en productos
             seleccionados.</p>
-          <a href="#" className="btn btn-primary">Ver Ofertas</a>
+          <Link to="/search?mode=news" className="btn btn-primary">Ver Ofertas</Link>
         </div>
         <div className={styles.banner}>
           <img src={newProducts} alt="Nuevos productos" />
           <h3>Nuevos Productos</h3>
           <p>Descubre las últimas novedades en nuestro catálogo. ¡Productos innovadores que te encantarán!</p>
-          <a href="#" className="btn btn-primary">Ver Nuevos Productos</a>
+          <Link to="/search?mode=offerts" className="btn btn-primary">Ver Nuevos Productos</Link>
         </div>
       </section>
     </div>

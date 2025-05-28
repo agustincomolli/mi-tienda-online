@@ -10,15 +10,23 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className="contact-info">
                 <h4>Contacto</h4>
-                <p>Email: info@mitienda.com</p>
+                <p>
+                    Email: <a
+                        href="mailto:info@mitienda.com"
+                        className={styles.footerLink}
+                        title="Escríbenos un correo electrónico"
+                    >
+                        info@mitienda.com
+                    </a>
+                </p>
                 <p>Teléfono: +123 456 789</p>
             </div>
             <div className="useful-links">
                 <h4>Enlaces Útiles</h4>
                 <ul>
-                    <li><Link to="/terms">Términos y Condiciones</Link></li>
-                    <li><Link to="/policies">Política de Privacidad</Link></li>
-                    <li><Link to="faq">Preguntas Frecuentes</Link></li>
+                    <li><Link to="/terms" className={styles.footerLink}>Términos y Condiciones</Link></li>
+                    <li><Link to="/policies" className={styles.footerLink}>Política de Privacidad</Link></li>
+                    <li><Link to="faq" className={styles.footerLink}>Preguntas Frecuentes</Link></li>
                 </ul>
             </div>
             <div className={styles.copyright}>

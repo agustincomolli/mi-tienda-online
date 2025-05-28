@@ -4,7 +4,8 @@
  * @throws {Error} Si ocurre un error en la petición.
  */
 export async function fetchAllProducts() {
-  const response = await fetch("https://dummyjson.com/products");
+  const API_URL = "https://dummyjson.com/products"
+  const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Error al cargar productos");
   return response.json();
 }
@@ -18,7 +19,8 @@ export async function fetchAllProducts() {
  * @throws {Error} Si ocurre un error en la petición.
  */
 export async function fetchFeaturedProducts({ limit = 3, skip = 0 } = {}) {
-  const response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}&sortBy=rating&order=desc`);
+  const API_URL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}&sortBy=rating&order=desc`
+  const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Error al cargar productos destacados");
   return response.json();
 }
@@ -30,7 +32,8 @@ export async function fetchFeaturedProducts({ limit = 3, skip = 0 } = {}) {
  * @throws {Error} Si ocurre un error en la petición o el producto no existe.
  */
 export async function fetchProductById(id) {
-  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  const API_URL = `https://dummyjson.com/products/${id}`
+  const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Producto no encontrado");
   return response.json();
 }
@@ -43,15 +46,28 @@ export async function fetchProductById(id) {
  * @returns {Promise<Object>} Productos filtrados.
  */
 export async function fetchProductsByQuery({ q = "", category = "" } = {}) {
-  let url = "https://dummyjson.com/products";
+  let api_url = "https://dummyjson.com/products";
   if (category) {
-    url = `https://dummyjson.com/products/category/${encodeURIComponent(category)}`;
-    if (q) url += `?q=${encodeURIComponent(q)}`;
+    api_url = `https://dummyjson.com/products/category/${encodeURIComponent(category)}`;
+    if (q) api_url += `?q=${encodeURIComponent(q)}`;
   } else if (q) {
-    url += `/search?q=${encodeURIComponent(q)}`;
+    api_url += `/search?q=${encodeURIComponent(q)}`;
   }
-  const response = await fetch(url);
+  const response = await fetch(api_url);
   if (!response.ok) throw new Error("Error al buscar productos");
   return response.json();
 }
 
+export async function fetchNewProducts() {
+  const API_URL = "https://dummyjson.com/products?limit=10&sortBy=id&order=desc"
+  const response = await fetch(API_URL);
+  if (!response.ok) throw new Error("No hay productos");
+  return response.json();
+}
+
+export async function fetchOfferts() {
+  const API_URL = "https://dummyjson.com/products?limit=10&sortBy=discountPercentage&order=desc"
+  const response = await fetch(API_URL);
+  if (!response.ok) throw new Error("No hay productos");
+  return response.json();
+}

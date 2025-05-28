@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -61,6 +61,22 @@ export async function logoutUser() { // Nueva función para cerrar sesión
     console.log("Sesión cerrada con éxito.");
   } catch (error) {
     console.error("Error al cerrar sesión:", error.code, error.message);
+    throw error;
+  }
+}
+
+/**
+ * Inicia sesión con Google.
+ * @returns {Promise<UserCredential>} Una promesa que se resuelve con las credenciales del usuario.
+ */
+export async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    console.log("Inicio de sesión con Google exitoso:", result.user);
+    return result;
+  } catch (error) {
+    console.error("Error al iniciar sesión con Google:", error.code, error.message);
     throw error;
   }
 }

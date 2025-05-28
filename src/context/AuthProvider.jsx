@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AuthContext } from "./AuthContext";
-import { auth, loginUser, registerUser, logoutUser } from "../auth/firebase"; // Importamos las funciones de Firebase
+import { auth, loginUser, registerUser, logoutUser, signInWithGoogle } from "../auth/firebase"; // Importamos las funciones de Firebase
 import { onAuthStateChanged } from "firebase/auth"; // Importamos para escuchar cambios en el estado de autenticación
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
@@ -28,6 +28,17 @@ export function AuthProvider({ children }) {
       return { success: true, user: userCredential.user };
     } catch (error) {
       console.error("Error en login:", error);
+      return { success: false, error: error.message };
+    }
+  }, []);
+
+  // Función para iniciar sesión en Google
+  const loginGoogle = useCallback(async () => {
+    try {
+      const userCredential = await signInWithGoogle();
+      return { success: true, user: userCredential.user };
+    } catch (error) {
+      console.error("Error en loginGoogle:", error);
       return { success: false, error: error.message };
     }
   }, []);
@@ -61,12 +72,13 @@ export function AuthProvider({ children }) {
     loadingAuth, // Si la autenticación inicial aún está cargando
     signup,      // Función para registrar
     login,       // Función para iniciar sesión
-    logout       // Función para cerrar sesión
+    logout,      // Función para cerrar sesión
+    loginGoogle  // Función para iniciar sesión con Google
   };
 
   // Mientras la autenticación inicial esté cargando, podrías mostrar un spinner
   if (loadingAuth) {
-    return <LoadingSpinner message="Cargando autenticación..."/>; // Puedes reemplazar esto con un componente de spinner
+    return <LoadingSpinner message="Cargando autenticación..." />; // Puedes reemplazar esto con un componente de spinner
   }
 
   return (

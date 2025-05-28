@@ -21,7 +21,7 @@
   margin: 0;
 }
 
-.footer ul li a {
+.footerLink {
   position: relative;
   display: inline-block;
   color: var(--text-muted);
@@ -29,7 +29,7 @@
   border-bottom: 1px solid transparent;
 }
 
-.footer ul li a::after {
+.footerLink::after {
   content: '';
   position: absolute;
   left: 0;
@@ -40,7 +40,7 @@
   transition: width 0.5s;
 }
 
-.footer ul li a:hover::after {
+.footerLink:hover::after {
   width: 100%;
 }
 

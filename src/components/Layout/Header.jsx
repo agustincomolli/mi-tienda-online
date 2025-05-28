@@ -44,6 +44,7 @@ export default function Header({ toggleCart, menuOpen, setMenuOpen }) {
             <form onSubmit={handleSearch} className={`${styles.searchBar} ${menuOpen ? styles.searchBarHidden : ''}`}>
                 <input
                     type="text"
+                    name="to-search"
                     placeholder="Buscar productos..."
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
