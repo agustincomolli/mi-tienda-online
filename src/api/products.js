@@ -58,6 +58,11 @@ export async function fetchProductsByQuery({ q = "", category = "" } = {}) {
   return response.json();
 }
 
+/**
+ * Obtiene los productos más nuevos desde la API.
+ * @returns {Promise<Object>} Promesa que resuelve con los productos más recientes.
+ * @throws {Error} Si ocurre un error en la petición.
+ */
 export async function fetchNewProducts() {
   const API_URL = "https://dummyjson.com/products?limit=10&sortBy=id&order=desc"
   const response = await fetch(API_URL);
@@ -65,6 +70,11 @@ export async function fetchNewProducts() {
   return response.json();
 }
 
+/**
+ * Obtiene los productos con mayor descuento desde la API.
+ * @returns {Promise<Object>} Promesa que resuelve con los productos en oferta.
+ * @throws {Error} Si ocurre un error en la petición.
+ */
 export async function fetchOfferts() {
   const API_URL = "https://dummyjson.com/products?limit=10&sortBy=discountPercentage&order=desc"
   const response = await fetch(API_URL);
