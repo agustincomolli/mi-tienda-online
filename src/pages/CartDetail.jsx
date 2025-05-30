@@ -48,7 +48,7 @@ export default function CartDetail() {
   // Renderiza el contenido del carrito
   return (
     <div className="pageContent">
-      <h2>Carrito de compras</h2>
+      <h2 className="heading-2">Carrito de compras</h2>
       {/* Si el carrito está vacío, muestra un mensaje */}
       {cartItemsList.length < 1 ? (
         <p className={styles.emptyCartMessage}>Tu carrito de compras esta vacío.</p>
@@ -57,7 +57,7 @@ export default function CartDetail() {
           {/* Lista de productos en el carrito */}
           <article className={styles.cartItems}>
             <header className={styles.cartItemsHeader}>
-              <h3>Mi carrito</h3>
+              <h3 className="heading-3">Mi carrito</h3>
             </header>
             <main className={styles.cartItemsDetails}>
               <ul className={styles.products}>
@@ -97,7 +97,7 @@ export default function CartDetail() {
           {/* Resumen del pedido */}
           <aside className={styles.cartSummary}>
             <header className={styles.cartSummaryHeader}>
-              <h3>Resumen del pedido</h3>
+              <h3 className="heading-3">Resumen del pedido</h3>
             </header>
             <main className={styles.cartSummarySubtotal}>
               <dl>

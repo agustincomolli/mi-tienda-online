@@ -10,7 +10,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className="contact-info">
                 <h4>Contacto</h4>
-                <p>
+                <p className="paragraph">
                     Email: <a
                         href="mailto:info@mitienda.com"
                         className={styles.footerLink}
@@ -19,7 +19,7 @@ export default function Footer() {
                         info@mitienda.com
                     </a>
                 </p>
-                <p>Teléfono: +123 456 789</p>
+                <p className="paragraph">Teléfono: +123 456 789</p>
             </div>
             <div className="useful-links">
                 <h4>Enlaces Útiles</h4>
@@ -30,7 +30,7 @@ export default function Footer() {
                 </ul>
             </div>
             <div className={styles.copyright}>
-                <p>&copy; 2025 Mi Tienda Online, por Agustín Comolli. Todos los derechos reservados.</p>
+                <p className="paragraph">&copy; 2025 Mi Tienda Online, por Agustín Comolli. Todos los derechos reservados.</p>
                 <div className={styles.socialNetworks}>
                     <a href="https://www.facebook.com" target="_blank" title="Facebook">
                         <i className='bx bxl-facebook-circle' ></i>

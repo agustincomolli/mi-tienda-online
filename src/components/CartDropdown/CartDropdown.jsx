@@ -8,7 +8,7 @@ import CartDropdownItem from "./CartDropdownItem"
  * Componente que representa el carrito de compras.
  * Muestra los productos agregados, permite modificar cantidades y eliminar productos.
  */
-export default function CartDropdown({setShowCart}) {
+export default function CartDropdown({ setShowCart }) {
     const { cartItemsList, getSubtotal } = useContext(CartContext);
 
     // Hook para navegar
@@ -22,11 +22,11 @@ export default function CartDropdown({setShowCart}) {
     // Renderiza el carrito desplegable.
     return (
         <div className={styles.cartDropdown}>
-            <h3>Tu Carrito</h3>
+            <h3 className="heading-3">Tu Carrito</h3>
             {
                 // Si el carrito está vacío, muestra un mensaje.
                 cartItemsList.length == 0 ? (
-                    <p>Tu carrito está vacío</p>
+                    <p className="paragraph">Tu carrito está vacío</p>
                 ) : (
                     // Si hay productos, los muestra en una lista.
                     <ul className={styles.cartItems}>
@@ -43,7 +43,7 @@ export default function CartDropdown({setShowCart}) {
             }
             {/* Muestra el subtotal y botones de acción */}
             <div className={styles.cartSummary}>
-                <p>Subtotal: $ {getSubtotal()}</p>
+                <p className="paragraph">Subtotal: $ {getSubtotal()}</p>
                 <button className={`btn btn-primary ${styles.cartSummaryButton}`} onClick={handleClick}>
                     Ver Carrito
                 </button>

@@ -24,11 +24,11 @@ export default function ProductCard({ product }) {
                 {/* Imagen del producto */}
                 <img src={product.images[0]} alt={product.title} />
                 {/* Nombre del producto */}
-                <h3>{product.title}</h3>
+                <h3 className="heading-3">{product.title}</h3>
             </Link>
             {/* Footer: precio y botón */}
             <div className={styles.productCardFooter}>
-                <p>$ {product.price}</p>
+                <p className="paragraph">$ {product.price}</p>
                 <button className={`btn btn-success`} onClick={handleClick}>Agregar al Carrito</button>
             </div>
         </div>

@@ -46,7 +46,7 @@ export default function Login() {
         // Login exitoso, mostramos mensaje y redirigimos
         await Swal.fire({
           title: "Inicio de sesión exitoso",
-          html: `<p>¡Bienvenido, <strong>${result.user.email}</strong>!</p>`,
+          html: `<p className="paragraph">¡Bienvenido, <strong>${result.user.email}</strong>!</p>`,
           icon: "success",
           confirmButtonText: "Continuar",
           customClass: {
@@ -109,7 +109,7 @@ export default function Login() {
         // Login social exitoso
         await Swal.fire({
           title: "Inicio de sesión exitoso",
-          html: `<p>¡Bienvenido, <strong>${result.user.displayName || result.user.email}</strong>!</p>`,
+          html: `<p className="paragraph">¡Bienvenido, <strong>${result.user.displayName || result.user.email}</strong>!</p>`,
           icon: "success",
           confirmButtonText: "Continuar",
           customClass: {
@@ -156,7 +156,7 @@ export default function Login() {
   // Renderizado del formulario de login y botones sociales
   return (
     <div className={styles.loginContent}>
-      <h2>Iniciar sesión</h2>
+      <h2 className="heading-2">Iniciar sesión</h2>
       {/* Formulario de login */}
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <input
@@ -208,8 +208,8 @@ export default function Login() {
 
       {/* Ayuda y registro */}
       <div className={styles.loginHelp}>
-        <p>¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
-        <p>
+        <p className="paragraph">¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
+        <p className="paragraph">
           <small>
             <strong>Credenciales de prueba (registra uno nuevo):</strong><br />
             Email: prueba@example.com<br />

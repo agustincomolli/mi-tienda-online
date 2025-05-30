@@ -14,7 +14,7 @@
 .contactForm input[type="email"],
 .contactForm textarea {
   width: 100%;
-  padding: 10px;
+  padding: var(--spacing-sm);
   margin-top: var(--spacing-xs);
   margin-bottom: var(--spacing-sm);
   border: 1px solid var(--border-color);

@@ -29,7 +29,7 @@ export default function CartDropdownItem({ item }) {
             {/* Nombre del producto */}
             <h4>{item.title}</h4>
             {/* Precio unitario */}
-            <p>$ {item.price}</p>
+            <p className="paragraph">$ {item.price}</p>
             {/* Controles para modificar cantidad y eliminar */}
             <div className={styles.itemControls}>
                 {/* Botón para disminuir cantidad */}

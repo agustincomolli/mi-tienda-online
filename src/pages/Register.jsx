@@ -62,7 +62,7 @@ export default function Register() {
       if (result.success) {
         Swal.fire({
           title: "Registro exitoso",
-          html: `<p>¡Bienvenido! Has sido registrado como <strong>${email}</strong>.</p>`,
+          html: `<p className="paragraph">¡Bienvenido! Has sido registrado como <strong>${email}</strong>.</p>`,
           icon: "success",
           confirmButtonText: "Continuar",
           customClass: {
@@ -109,7 +109,7 @@ export default function Register() {
 
   return (
     <div className={styles.registerContent}>
-      <h2>Registrarse</h2>
+      <h2 className="heading-2">Registrarse</h2>
       <form className={styles.registerForm} onSubmit={handleSubmit}>
         <input
           type="email"

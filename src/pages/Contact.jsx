@@ -21,8 +21,8 @@ export default function Contact() {
 
   return (
     <div className="pageContent">
-      <h2>Contáctanos</h2>
-      <p>
+      <h2 className="heading-2">Contáctanos</h2>
+      <p className="paragraph">
         Si tienes alguna pregunta, comentario o necesitas ayuda, no dudes en ponerte en contacto con nosotros.
         Completa el siguiente formulario y te responderemos lo antes posible.
       </p>
@@ -41,18 +41,18 @@ export default function Contact() {
       </form>
 
       <section className={styles.contactInfo}>
-        <h3>Información de Contacto</h3>
-        <p><strong>Dirección: </strong>Av Siempreviva 742 Springfield</p>
-        <p><strong>Teléfono: </strong>+123 456 789</p>
-        <p><strong>Email: </strong>info@mitienda.com</p>
-        <p>
+        <h3 className="heading-3">Información de Contacto</h3>
+        <p className="paragraph"><strong>Dirección: </strong>Av Siempreviva 742 Springfield</p>
+        <p className="paragraph"><strong>Teléfono: </strong>+123 456 789</p>
+        <p className="paragraph"><strong>Email: </strong>info@mitienda.com</p>
+        <p className="paragraph">
           <strong>Horario de Atención: </strong>
           Lunes a Viernes, 9am - 6pm
         </p>
       </section>
 
       <section className={styles.mapContainer}>
-        <h3>Nuestra Ubicación</h3>
+        <h3 className="heading-3">Nuestra Ubicación</h3>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.797334938792!2d-73.98517748486527!3d40.75889547932137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c64802a1%3A0x1c91217994825988!2sTimes%20Square!5e0!3m2!1ses!2sus!4v1680781036189!5m2!1ses!2sus"
           allowFullScreen={true}
