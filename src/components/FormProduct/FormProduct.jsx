@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./FormProduct.module.css"
 
 /**
@@ -6,16 +7,19 @@ import styles from "./FormProduct.module.css"
  * Permite ingresar nombre, descripción, imagen, precio, categoría, marca y calificación.
  * Incluye validación de campos y muestra mensajes de error.
  */
-export default function FormProduct() {
+export default function FormProduct({ onProductAdded }) {
+  // Hook de navegación para redirigir al usuario
+  const navigate = useNavigate();
+
   // Estado para los datos del producto
   const [product, setProduct] = useState({
     title: "",
     description: "",
     imageURL: "",
-    price: "",
+    price: 0,
     category: "",
     brand: "",
-    rating: ""
+    rating: 3
   });
 
   // Estado para mostrar/ocultar el modal de imagen
@@ -31,10 +35,10 @@ export default function FormProduct() {
       title: "",
       description: "",
       imageURL: "",
-      price: "",
+      price: 0,
       category: "",
       brand: "",
-      rating: ""
+      rating: 3
     });
     setValidationErrors({});
   }
@@ -43,14 +47,12 @@ export default function FormProduct() {
   const [validationErrors, setValidationErrors] = useState({});
 
   /**
-   * Maneja el envío del formulario, valida los campos y muestra errores si existen.
-   * @param {Event} event 
-   */
-  function handleSubmit(event) {
-    event.preventDefault();
+ * Valida los campos del producto y retorna un objeto con los errores encontrados.
+ * @param {Object} product - Objeto con los datos del producto.
+ * @returns {Object} Errores de validación.
+ */
+  function validateProduct(product) {
     const errors = {};
-
-    // Validaciones de los campos
     if (!product.title.trim()) {
       errors.title = "El nombre del producto es obligatorio.";
     }
@@ -69,12 +71,38 @@ export default function FormProduct() {
     if (!product.rating || isNaN(product.rating) || product.rating < 0 || product.rating > 5) {
       errors.rating = "La calificación debe estar en 0 y 5.";
     }
+    return errors;
+  }
+
+  /**
+   * Maneja el envío del formulario, valida los campos y muestra errores si existen.
+   * @param {Event} event 
+   */
+  function handleSubmit(event) {
+    event.preventDefault();
+    const errors = validateProduct(product);
 
     // Si hay errores, se actualiza el estado y se detiene el envío
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
     }
+
+    // Limpiar los errores si no hay nuevos.
+    setValidationErrors({});
+
+    const newProduct = {
+      title: product.title,
+      description: product.description,
+      imageURL: product.imageURL,
+      price: parseFloat(product.price),
+      category: product.category,
+      brand: product.brand,
+      rating: parseFloat(product.rating)
+    };
+
+    // Integración con API
+    onProductAdded(newProduct);
 
     // Si no hay errores, se limpia el formulario
     clearForm();
@@ -94,8 +122,11 @@ export default function FormProduct() {
    * @param {Event} event 
    */
   function handleChange(event) {
-    const { name, value } = event.target;
-    setProduct({ ...product, [name]: value });
+    const { name, value, type } = event.target;
+    setProduct(prev => ({
+      ...prev,
+      [name]: type === "number" || type === "range" ? Number(value) : value
+    }));
   };
 
   /**
@@ -103,6 +134,7 @@ export default function FormProduct() {
    */
   function handleCancel() {
     clearForm();
+    navigate("/");
   }
 
   return (
@@ -116,9 +148,25 @@ export default function FormProduct() {
             <div className={styles.empyImage}>
               <i className='bx bx-image'></i>
             </div> :
-            <img src={product.imageURL} alt="Vista previa del producto" name="imageUrl" />
+            <img src={product.imageURL} alt="Vista previa del producto" />
           }
-          <button type="button" className="btn btn-primary" onClick={handleLoadImage}>Cargar imagen...</button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleLoadImage}
+          >
+            {product.imageURL ? "Cambiar imagen..." : "Cargar imagen..."}
+          </button>
+          {product.imageURL && (
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => setProduct(prev => ({ ...prev, imageURL: "" }))}
+            >
+              Quitar imagen
+            </button>
+          )}
+
         </aside>
         {/* Sección de datos del producto */}
         <section className={styles.productData}>

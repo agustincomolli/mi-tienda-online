@@ -81,3 +81,32 @@ export async function fetchOfferts() {
   if (!response.ok) throw new Error("No hay productos");
   return response.json();
 }
+
+/**
+ * Agrega un nuevo producto utilizando la API de DummyJSON.
+ * 
+ * @async
+ * @function
+ * @param {Object} newProduct - Objeto que representa el nuevo producto a agregar.
+ * @returns {Promise<Object>} Una promesa que resuelve con la respuesta de la API simulada.
+ * @throws {Error} Lanza un error si la respuesta de la API no es exitosa.
+ * 
+ * @description
+ * Esta función envía una solicitud POST a la API de DummyJSON para simular la adición de un nuevo producto.
+ * Nota: La operación no es persistente y solo sirve para fines de simulación.
+ */
+export async function fetchAddNewProduct(newProduct) {
+  // URL de DummyJSON para agregar productos (NO PERSISTENTE, solo para simulación)
+  const DUMMYJSON_URL = 'https://dummyjson.com/products/add';
+  const response = await fetch(DUMMYJSON_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newProduct),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.json().message || response.statusText}`);
+  }
+
+  return response.json();
+}

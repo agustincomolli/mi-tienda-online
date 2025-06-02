@@ -69,7 +69,7 @@ export default function Home() {
 
       <section className={styles.featuredProducts}>
         <h2 className="heading-2">Productos Destacados</h2>
-        {loading && <LoadingSpinner message="Cargando productos.." />}
+        {loading && <LoadingSpinner message="Cargando productos..." />}
         {error && <ErrorMessage message={error} />}
         {/* Lista de productos, recibe la función para agregar al carrito */}
         <ProductList products={topProducts} />
