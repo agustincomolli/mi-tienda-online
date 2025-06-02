@@ -1,0 +1,54 @@
+.accordion {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-lg);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.accordionToggle {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-dark);
+  border-radius: var(--border-radius-lg);
+  transition: background 0.2s;
+}
+
+.accordionToggle:hover,
+.accordionToggle:focus {
+  background: var(--bg-light);
+}
+
+.accordionArrow {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin-left: var(--spacing-sm);
+  transition: transform 0.3s;
+}
+
+.accordionContent {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-white);
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+}
+
+.accordionContent.open {
+  /* max-height se controla inline para animar según el contenido */
+}
+
+.accordionInner {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-color-light);
+  background: var(--bg-white);
+}

@@ -5,6 +5,7 @@ import { fetchAddNewProduct } from "../api/products";
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import Accordion from "../components/Accordion/Accordion";
 
 import Swal from 'sweetalert2';
 
@@ -46,12 +47,13 @@ export default function Admin() {
 
   return (
     <div className="pageContent">
-      <article>
-        <h2 className="heading-2">Agregar producto</h2>
+      <Accordion title="Agregar producto" defaultOpen={false}>
+        {/* <h2 className="heading-2">Agregar producto</h2> */}
         {loading && <LoadingSpinner message="Agregando productos..." />}
         {error && <ErrorMessage message={error} />}
-        <FormProduct onProductAdded={handleProductAdded} />
-      </article>
+        <FormProduct onProductAdded={handleProductAdded} defaultOpen={false} />
+      </Accordion>
+      {/* Puedes agregar más acordeones aquí */}
     </div>
   );
 }
