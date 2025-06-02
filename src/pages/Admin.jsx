@@ -47,8 +47,8 @@ export default function Admin() {
 
   return (
     <div className="pageContent">
+        <h2 className="heading-2">Administración de Mi Tienda Online</h2>
       <Accordion title="Agregar producto" defaultOpen={false}>
-        {/* <h2 className="heading-2">Agregar producto</h2> */}
         {loading && <LoadingSpinner message="Agregando productos..." />}
         {error && <ErrorMessage message={error} />}
         <FormProduct onProductAdded={handleProductAdded} defaultOpen={false} />
