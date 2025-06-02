@@ -43,9 +43,9 @@
   border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
 }
 
-.accordionContent.open {
+/* .accordionContent.open { */
   /* max-height se controla inline para animar según el contenido */
-}
+/* } */
 
 .accordionInner {
   padding: var(--spacing-lg);
