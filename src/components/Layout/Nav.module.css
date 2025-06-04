@@ -40,7 +40,7 @@
   color: var(--text-dark);
   text-decoration: none;
   padding: 1rem 2rem;
-  font-size: 2rem;
+  font-size: var(--font-size-lg);
   font-weight: bold;
   transition: color 0.2s;
   display: flex;
@@ -50,7 +50,7 @@
 
 .navMenuLinkIcon {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
 }
