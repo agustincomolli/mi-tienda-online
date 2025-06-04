@@ -1,0 +1,144 @@
+/* --- Estilos base (Mobile First) y generales --- */
+
+.tableWrapper {
+  /* Si necesitas margen superior en mobile, puedes agregarlo aquí */
+  margin-top: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  font-size: 1rem;
+  min-width: 0;
+}
+
+th,
+td {
+  padding: 0.5rem 0.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color-light);
+  font-size: var(--font-size-sm);
+}
+
+th {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.priceHeader,
+.actionHeader {
+  text-align: center;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.emptyMsg {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem 0;
+}
+
+.price {
+  text-align: right;
+  margin-right: var(--spacing-xs);
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  justify-content: center;
+}
+
+/* --- Responsive: Mobile como cards/fichas --- */
+@media (max-width: 767px) {
+  .table {
+    border: none;
+    min-width: 0;
+    box-shadow: none;
+    background: none;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  tr {
+    margin-bottom: var(--spacing-lg);
+    background: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-md);
+  }
+
+  td {
+    padding: var(--spacing-xs) 0;
+    border: none;
+    position: relative;
+    text-align: left;
+    font-size: var(--font-size-md);
+  }
+
+  .price {
+    text-align: left;
+    margin-right: 0;
+  }
+
+  .buttonWrapper {
+    flex-direction: row;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    justify-content: flex-start;
+  }
+
+  td[data-label] {
+    /* El min-width del label en :before debe coincidir con este padding */
+    padding-left: 100px;
+    text-indent: 0;
+    position: relative;
+  }
+
+  td[data-label]:before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    color: var(--text-secondary);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-width: 100px;
+    padding: var(--spacing-xs) 0;
+  }
+}
+
+/* --- Tablets y pantallas medianas --- */
+@media (min-width: 768px) {
+  .tableWrapper {
+    padding: 0 var(--spacing-sm);
+  }
+
+  th,
+  td {
+    padding: 0.75rem 0.5rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .buttonWrapper {
+    flex-direction: row;
+    gap: var(--spacing-md);
+  }
+}

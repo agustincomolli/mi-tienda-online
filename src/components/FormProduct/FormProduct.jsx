@@ -105,7 +105,7 @@ export default function FormProduct({ onProductAdded }) {
     onProductAdded(newProduct);
 
     // Si no hay errores, se limpia el formulario
-    clearForm();
+    // clearForm();
   };
 
   /**
@@ -127,6 +127,8 @@ export default function FormProduct({ onProductAdded }) {
       ...prev,
       [name]: type === "number" || type === "range" ? Number(value) : value
     }));
+    // Limpiar los errores si no hay nuevos.
+    setValidationErrors({});
   };
 
   /**
@@ -134,7 +136,7 @@ export default function FormProduct({ onProductAdded }) {
    */
   function handleCancel() {
     clearForm();
-    navigate("/");
+    navigate("/admin");
   }
 
   return (

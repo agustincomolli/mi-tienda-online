@@ -55,34 +55,30 @@ function App() {
   const [error, setError] = useState(null)
 
   /**
+   * Función asíncrona para obtener los productos desde la API.
+   * Maneja el estado de carga y posibles errores.
+   */
+  async function loadProducts() {
+    try {
+      setLoading(true) // Indica que la carga ha comenzado
+      setError(null);
+      const data = await fetchAllProducts();
+      setProducts(data.products);
+    } catch (err) {
+      setError(err.message);
+      console.error('Error al cargar productos:', err);
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /**
    * Obtiene los productos desde la API al montar el componente.
    * Maneja los estados de carga y error.
    */
   useEffect(() => {
-    /**
-     * Función asíncrona para obtener los productos desde la API.
-     * Maneja el estado de carga y posibles errores.
-     */
-    const fetchProducts = async () => {
-      try {
-        setLoading(true) // Indica que la carga ha comenzado
-
-        const data = await fetchAllProducts();
-
-        // Simula una demora de 4 segundos antes de mostrar los productos
-        setTimeout(() => {
-          setProducts(data.products);
-          setError(null);
-          setLoading(false);
-        }, 4000);
-      } catch (error) {
-        setError(error.message);
-        setProducts([]);
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
+    loadProducts();
     // El array vacío [] significa que este efecto solo se ejecuta al montar el componente
   }, [])
 
