@@ -1,0 +1,52 @@
+.searchBar {
+  display: flex;
+  /* Mostrar por defecto en mobile cuando menú está cerrado */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.searchBar input[type="text"] {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px 20px;
+  border: 2px solid var(--border-color);
+  /* Bordes redondeados solo en la izquierda */
+  border-radius: 50px 0 0 50px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchBar input[type="text"]:hover,
+.searchBar input[type="text"]:focus {
+  border-color: var(--color-primary);
+}
+
+.searchBar button {
+  /* background-color: var(--primary-blue-color); */
+  /* Asegura que el borde del botón coincida con el input */
+  border: 2px solid var(--color-primary);
+  /* Bordes redondeados solo en la derecha */
+  border-radius: 0 50px 50px 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBar button i {
+  font-size: 20px;
+}
+
+.message {
+  font-size: var(--font-size-lg);
+  text-align: center;
+  color: var(--color-danger);
+  font-weight: bold;
+}

@@ -5,6 +5,7 @@ import { fetchAllProducts } from "./api/products";
 import About from "./pages/About";
 import CartDetail from "./pages/CartDetail";
 import Contact from "./pages/Contact";
+import Edit from "./pages/Edit";
 import Faq from "./pages/Faq";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -137,6 +138,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<CartDetail />} />
             <Route path="/admin" element={<Admin />}></Route>
+            <Route path="/admin/edit/:id" element={<Edit />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />

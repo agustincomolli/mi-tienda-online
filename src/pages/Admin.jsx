@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAddNewProduct, fetchAllProducts } from "../api/products";
+import { fetchAddNewProduct, fetchAllProducts, fetchProductsByQuery } from "../api/products";
 
 import FormProduct from "../components/FormProduct/FormProduct";
 import ProductAdminTable from "../components/ProductAdminTable/ProductAdminTable";
@@ -18,16 +18,22 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   /**
  * Función asíncrona para obtener los productos desde la API.
  * Maneja el estado de carga y posibles errores.
  */
-  async function loadProducts() {
+  async function loadProducts(query = "") {
     try {
       setLoading(true) // Indica que la carga ha comenzado
       setError(null);
-      const data = await fetchAllProducts();
+      let data;
+      if (query.trim().length === 0) {
+        data = await fetchAllProducts();
+      } else {
+        data = await fetchProductsByQuery({ q: query });
+      }
       setProducts(data.products);
     } catch (err) {
       setError(err.message);
@@ -46,7 +52,6 @@ export default function Admin() {
     loadProducts();
     // El array vacío [] significa que este efecto solo se ejecuta al montar el componente
   }, [])
-
 
   // URL de DummyJSON para agregar productos (NO PERSISTENTE, solo para simulación)
   const DUMMYJSON_URL = 'https://dummyjson.com/products/add';
@@ -67,7 +72,7 @@ export default function Admin() {
           confirmButton: 'swal-btn-confirm',
         }
       });
-      navigate("/admin");
+      navigate("/products");
     } catch (err) {
       setError(err.message);
       console.error('Error al agregar producto:', error);
@@ -75,6 +80,13 @@ export default function Admin() {
       setLoading(false);
     }
   };
+
+  function handleSearch(event) {
+    event.preventDefault();
+    if (searchTerm.trim()) {
+      loadProducts(searchTerm);
+    }
+  }
 
   return (
     <div className="pageContent">
@@ -87,16 +99,33 @@ export default function Admin() {
       <Accordion className={styles.accordion} title="Agregar producto" defaultOpen={false}>
         {loading && <LoadingSpinner message="Agregando productos..." />}
         {error && <ErrorMessage message={error} />}
-        <FormProduct onProductAdded={handleProductAdded} defaultOpen={false} />
+        <FormProduct onProductAdded={handleProductAdded} />
       </Accordion>
-      
+
       {/* Tabla de productos */}
       <Accordion className={styles.accordion} title="Listado de productos">
+        <form onSubmit={handleSearch} className={styles.searchBar}>
+          <input
+            type="text"
+            name="to-search"
+            placeholder="¿Qué productos deseas modificar?"
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
+          <button className="btn btn-primary" title="Buscar productos">
+            <i className='bx bx-search'></i>
+          </button>
+        </form>
         {loading && <LoadingSpinner message="Agregando productos..." />}
         {error && <ErrorMessage message={error} />}
-        <ProductAdminTable
-          products={products}
-        />
+        {!loading && !error && products.length === 0 && (
+          <p className={styles.message}>No se encontraron productos.</p>
+        )}
+        {!loading && !error && products.length > 0 && (
+          <ProductAdminTable
+            products={products}
+          />
+        )}
       </Accordion>
     </div>
   );

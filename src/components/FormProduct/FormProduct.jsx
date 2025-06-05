@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./FormProduct.module.css"
 
@@ -7,25 +7,31 @@ import styles from "./FormProduct.module.css"
  * Permite ingresar nombre, descripción, imagen, precio, categoría, marca y calificación.
  * Incluye validación de campos y muestra mensajes de error.
  */
-export default function FormProduct({ onProductAdded }) {
+export default function FormProduct({ onProductAdded, onProductEdited, initialProduct = null }) {
   // Hook de navegación para redirigir al usuario
   const navigate = useNavigate();
 
   // Estado para los datos del producto
-  const [product, setProduct] = useState({
-    title: "",
-    description: "",
-    imageURL: "",
-    price: 0,
-    category: "",
-    brand: "",
-    rating: 3
-  });
+  const [product, setProduct] = useState(
+    initialProduct || {
+      title: "",
+      description: "",
+      thumbnail: "",
+      price: 0,
+      category: "",
+      brand: "",
+      rating: 2.5
+    });
+
+  // Actualiza el estado si cambia el producto recibido
+  useEffect(() => {
+    if (initialProduct) setProduct(initialProduct);
+  }, [initialProduct]);
 
   // Estado para mostrar/ocultar el modal de imagen
   const [showModal, setShowModal] = useState(false);
   // Estado temporal para la URL de la imagen en el modal
-  const [tempImageURL, setTempImageURL] = useState("");
+  const [tempthumbnail, setTempthumbnail] = useState("");
 
   /**
    * Limpia el formulario y los errores de validación.
@@ -34,11 +40,11 @@ export default function FormProduct({ onProductAdded }) {
     setProduct({
       title: "",
       description: "",
-      imageURL: "",
+      thumbnail: "",
       price: 0,
       category: "",
       brand: "",
-      rating: 3
+      rating: 2.5
     });
     setValidationErrors({});
   }
@@ -91,21 +97,15 @@ export default function FormProduct({ onProductAdded }) {
     // Limpiar los errores si no hay nuevos.
     setValidationErrors({});
 
-    const newProduct = {
-      title: product.title,
-      description: product.description,
-      imageURL: product.imageURL,
-      price: parseFloat(product.price),
-      category: product.category,
-      brand: product.brand,
-      rating: parseFloat(product.rating)
-    };
-
     // Integración con API
-    onProductAdded(newProduct);
+    if (initialProduct && onProductEdited) {
+      onProductEdited({ ...product, id: initialProduct.id });
+    } else if (onProductAdded) {
+      onProductAdded(product);
+    }
 
     // Si no hay errores, se limpia el formulario
-    // clearForm();
+    clearForm();
   };
 
   /**
@@ -139,6 +139,36 @@ export default function FormProduct({ onProductAdded }) {
     navigate("/admin");
   }
 
+  /**
+   * Genera un arreglo de íconos de estrellas para representar visualmente una calificación.
+   *
+   * @param {number} rating - Calificación numérica (puede incluir decimales) entre 0 y 5.
+   * @returns {JSX.Element[]} Arreglo de elementos JSX que representan estrellas llenas, medias y vacías.
+   */
+  function renderStars(rating) {
+    const maxStars = 5;
+    const filledStars = Math.floor(rating);
+    const halfStar = rating - filledStars >= 0.5;
+    const emptyStars = maxStars - filledStars - (halfStar ? 1 : 0);
+
+    const stars = [];
+
+    for (let i = 0; i < filledStars; i++) {
+      stars.push(<i key={`filled-${i}`} className={`bx bxs-star ${styles.star}`}></i>);
+    }
+
+    if (halfStar) {
+      stars.push(<i key="half" className={`bx bxs-star-half ${styles.star}`}></i>);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<i key={`empty-${i}`} className={`bx bx-star ${styles.star}`}></i>);
+    }
+
+    return stars;
+  }
+
+
   return (
     <>
       {/* Formulario principal */}
@@ -146,24 +176,24 @@ export default function FormProduct({ onProductAdded }) {
         {/* Sección de imagen */}
         <aside className={styles.imageSection}>
           {/* Vista previa de la imagen o ícono por defecto */}
-          {!product.imageURL ?
+          {!product.thumbnail ?
             <div className={styles.empyImage}>
               <i className='bx bx-image'></i>
             </div> :
-            <img src={product.imageURL} alt="Vista previa del producto" />
+            <img src={product.thumbnail} alt="Vista previa del producto" />
           }
           <button
             type="button"
             className="btn btn-primary"
             onClick={handleLoadImage}
           >
-            {product.imageURL ? "Cambiar imagen..." : "Cargar imagen..."}
+            {product.thumbnail ? "Cambiar imagen..." : "Cargar imagen..."}
           </button>
-          {product.imageURL && (
+          {product.thumbnail && (
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => setProduct(prev => ({ ...prev, imageURL: "" }))}
+              onClick={() => setProduct(prev => ({ ...prev, thumbnail: "" }))}
             >
               Quitar imagen
             </button>
@@ -195,6 +225,7 @@ export default function FormProduct({ onProductAdded }) {
             <textarea
               id="description"
               name="description"
+              rows={5}
               value={product.description}
               onChange={handleChange}
               className={validationErrors.description ? styles.inputError : ""}
@@ -274,6 +305,7 @@ export default function FormProduct({ onProductAdded }) {
             {validationErrors.rating && (
               <span className={styles.errorMessage}><i className='bx bxs-error-circle'></i> {validationErrors.rating}</span>
             )}
+            <span>{renderStars(product.rating)}</span>
           </div>
         </section>
         {/* Botones de acción */}
@@ -296,8 +328,8 @@ export default function FormProduct({ onProductAdded }) {
               <h3>Agregar URL de Imagen</h3>
               <input
                 type="text"
-                value={tempImageURL}
-                onChange={(e) => setTempImageURL(e.target.value)}
+                value={tempthumbnail}
+                onChange={(e) => setTempthumbnail(e.target.value)}
                 placeholder="https://ejemplo.com/imagen.jpg"
               />
               <div className={styles.modalButtons}>
@@ -305,7 +337,7 @@ export default function FormProduct({ onProductAdded }) {
                   type="button"
                   className="btn btn-success"
                   onClick={() => {
-                    setProduct(prev => ({ ...prev, imageURL: tempImageURL }));
+                    setProduct(prev => ({ ...prev, thumbnail: tempthumbnail }));
                     setShowModal(false);
                   }}
                 >

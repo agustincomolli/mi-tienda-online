@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 import styles from "./ProductAdminTable.module.css";
 
-export default function ProductAdminTable({ products, onEdit, onDelete }) {
+export default function ProductAdminTable({ products, onDelete }) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>
@@ -26,7 +30,7 @@ export default function ProductAdminTable({ products, onEdit, onDelete }) {
                 <td data-label="Categoría">{product.category}</td>
                 <td data-label="Precio" className={styles.price}>$ {product.price}</td>
                 <td data-label="Acciones" className={styles.buttonWrapper}>
-                  <button className="btn btn-primary" onClick={() => onEdit(product)}>
+                  <button className="btn btn-primary" onClick={() => navigate(`/admin/edit/${product.id}`)}>
                     <i className='bx bx-edit'></i>
                   </button>
                   <button className="btn btn-danger" onClick={() => onDelete(product)}>

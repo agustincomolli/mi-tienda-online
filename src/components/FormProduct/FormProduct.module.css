@@ -43,7 +43,7 @@
 
 .fieldButtons button,
 .imageSection button,
-.modalButtons  button{
+.modalButtons button {
   padding: 10px 30px;
 }
 
@@ -129,6 +129,12 @@
   width: 100%;
   padding: 0.5rem;
   margin-top: 1rem;
+}
+
+.star {
+  color: #ffc107;
+  font-size: 1.4rem;
+  margin-right: 2px;
 }
 
 /* Tablets y pantallas medianas */
