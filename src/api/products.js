@@ -3,7 +3,7 @@
  * @returns {Promise<Object>} Promesa que resuelve con el listado de productos.
  * @throws {Error} Si ocurre un error en la petición.
  */
-export async function fetchAllProducts() {
+export async function getAllProducts() {
   const API_URL = "https://dummyjson.com/products"
   const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Error al cargar productos");
@@ -18,7 +18,7 @@ export async function fetchAllProducts() {
  * @returns {Promise<Object>} Promesa que resuelve con los productos destacados.
  * @throws {Error} Si ocurre un error en la petición.
  */
-export async function fetchFeaturedProducts({ limit = 3, skip = 0 } = {}) {
+export async function getFeaturedProducts({ limit = 3, skip = 0 } = {}) {
   const API_URL = `https://dummyjson.com/products?limit=${limit}&skip=${skip}&sortBy=rating&order=desc`
   const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Error al cargar productos destacados");
@@ -31,8 +31,8 @@ export async function fetchFeaturedProducts({ limit = 3, skip = 0 } = {}) {
  * @returns {Promise<Object>} Promesa que resuelve con el producto encontrado.
  * @throws {Error} Si ocurre un error en la petición o el producto no existe.
  */
-export async function fetchProductById(id) {
-  const API_URL = `https://dummyjson.com/products/${id}`
+export async function getProductById(id) {
+  const API_URL = `https://dummyjson.com/products/${id}`;
   const response = await fetch(API_URL);
   if (!response.ok) throw new Error("Producto no encontrado");
   return response.json();
@@ -45,7 +45,7 @@ export async function fetchProductById(id) {
  * @param {string} [params.category] - Categoría.
  * @returns {Promise<Object>} Productos filtrados.
  */
-export async function fetchProductsByQuery({ q = "", category = "" } = {}) {
+export async function getProductsByQuery({ q = "", category = "" } = {}) {
   let api_url = "https://dummyjson.com/products";
   if (category) {
     api_url = `https://dummyjson.com/products/category/${encodeURIComponent(category)}`;
@@ -63,7 +63,7 @@ export async function fetchProductsByQuery({ q = "", category = "" } = {}) {
  * @returns {Promise<Object>} Promesa que resuelve con los productos más recientes.
  * @throws {Error} Si ocurre un error en la petición.
  */
-export async function fetchNewProducts() {
+export async function getNewProducts() {
   const API_URL = "https://dummyjson.com/products?limit=10&sortBy=id&order=desc"
   const response = await fetch(API_URL);
   if (!response.ok) throw new Error("No hay productos");
@@ -75,7 +75,7 @@ export async function fetchNewProducts() {
  * @returns {Promise<Object>} Promesa que resuelve con los productos en oferta.
  * @throws {Error} Si ocurre un error en la petición.
  */
-export async function fetchOfferts() {
+export async function getOfferts() {
   const API_URL = "https://dummyjson.com/products?limit=10&sortBy=discountPercentage&order=desc"
   const response = await fetch(API_URL);
   if (!response.ok) throw new Error("No hay productos");
@@ -95,14 +95,71 @@ export async function fetchOfferts() {
  * Esta función envía una solicitud POST a la API de DummyJSON para simular la adición de un nuevo producto.
  * Nota: La operación no es persistente y solo sirve para fines de simulación.
  */
-export async function fetchAddNewProduct(newProduct) {
+export async function addNewProduct(newProduct) {
   // URL de DummyJSON para agregar productos (NO PERSISTENTE, solo para simulación)
-  const DUMMYJSON_URL = 'https://dummyjson.com/products/add';
-  const response = await fetch(DUMMYJSON_URL, {
+  const API_URL = 'https://dummyjson.com/products/add';
+  const response = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newProduct),
   });
+
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.json().message || response.statusText}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Actualiza un producto existente enviando una solicitud PUT a la API.
+ *
+ * @async
+ * @function
+ * @param {Object} product - El objeto del producto que se va a actualizar. Debe contener al menos la propiedad `id`.
+ * @returns {Promise<Object>} Una promesa que resuelve con el producto actualizado recibido de la API.
+ * @throws {Error} Lanza un error si la respuesta de la API no es exitosa.
+ */
+export async function updateProduct(product) {
+  const API_URL = `https://dummyjson.com/products/${product.id}`
+  const response = await fetch(API_URL, {
+    method: 'PUT', /* or PATCH */
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(
+      {
+        title: product.title,
+        description: product.description,
+        thumbnail: product.thumbnail,
+        price: product.price,
+        category: product.category,
+        brand: product.brand,
+        rating: product.rating
+      }
+    )
+  })
+
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}: ${response.json().message || response.statusText}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Elimina un producto enviando una solicitud PUT a la API.
+ * 
+ * @async
+ * @function
+ * @param {Object} product - El objeto del producto a eliminar.
+ * @param {number|string} product.id - El identificador único del producto.
+ * @returns {Promise<Object>} La respuesta de la API en formato JSON.
+ * @throws {Error} Lanza un error si la respuesta de la API no es exitosa.
+ */
+export async function deleteProduct(product) {
+  const API_URL = `https://dummyjson.com/products/${product.id}`
+  const response = await fetch(API_URL, {
+    method: 'DELETE'
+  })
 
   if (!response.ok) {
     throw new Error(`Error ${response.status}: ${response.json().message || response.statusText}`);

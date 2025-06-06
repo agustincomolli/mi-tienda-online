@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchFeaturedProducts } from "../api/products";
+import { getFeaturedProducts } from "../api/products";
 
 import offers from "../assets/images/offers.webp";
 import newProducts from "../assets/images/new-products.webp";
@@ -24,7 +24,7 @@ export default function Home() {
     async function getTopProducts() {
       try {
         setLoading(true);
-        const data = await fetchFeaturedProducts();
+        const data = await getFeaturedProducts();
         setTopProducts(data.products);
         setError(null);
       } catch (err) {

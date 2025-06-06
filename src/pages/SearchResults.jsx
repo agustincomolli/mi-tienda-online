@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { fetchProductsByQuery, fetchNewProducts, fetchOfferts } from "../api/products";
+import { getProductsByQuery, getNewProducts, getOfferts } from "../api/products";
 
 import ProductList from "../components/Products/ProductList";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -26,11 +26,11 @@ export default function SearchResults() {
         setError(null);
         let data;
         if (mode === "news") {
-          data = await fetchNewProducts();
+          data = await getNewProducts();
         } else if (mode === "offerts") {
-          data = await fetchOfferts();
+          data = await getOfferts();
         } else {
-          data = await fetchProductsByQuery({ q: query, category });
+          data = await getProductsByQuery({ q: query, category });
         }
         setProducts(data.products);
       } catch (err) {

@@ -7,7 +7,7 @@ import styles from "./FormProduct.module.css"
  * Permite ingresar nombre, descripción, imagen, precio, categoría, marca y calificación.
  * Incluye validación de campos y muestra mensajes de error.
  */
-export default function FormProduct({ onProductAdded, onProductEdited, initialProduct = null }) {
+export default function FormProduct({ onProductAdded, onProductUpdated, onCancel, initialProduct = null }) {
   // Hook de navegación para redirigir al usuario
   const navigate = useNavigate();
 
@@ -98,8 +98,8 @@ export default function FormProduct({ onProductAdded, onProductEdited, initialPr
     setValidationErrors({});
 
     // Integración con API
-    if (initialProduct && onProductEdited) {
-      onProductEdited({ ...product, id: initialProduct.id });
+    if (initialProduct && onProductUpdated) {
+      onProductUpdated(product);
     } else if (onProductAdded) {
       onProductAdded(product);
     }
@@ -136,7 +136,13 @@ export default function FormProduct({ onProductAdded, onProductEdited, initialPr
    */
   function handleCancel() {
     clearForm();
-    navigate("/admin");
+    // Si estamos en la página de Admin, llamar a la función onCancel del padre
+    if (onCancel) {
+      onCancel();
+    } else {
+      // Si no hay función onCancel (caso de edición), navegar al inicio
+      navigate("/");
+    }
   }
 
   /**

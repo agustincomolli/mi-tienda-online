@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { fetchProductById } from "../api/products";
+import { getProductById } from "../api/products";
 import { CartContext } from "../context/CartContext";
 
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -32,7 +32,7 @@ export default function ProductDetail() {
     const getProduct = async () => {
       try {
         setLoading(true);
-        const data = await fetchProductById(id); // Llama a la API con el id
+        const data = await getProductById(id); // Llama a la API con el id
         setProduct(data); // Guarda el producto en el estado
         setError(null);   // Limpia errores anteriores
       } catch (err) {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { fetchAllProducts } from "./api/products";
+import { getAllProducts } from "./api/products";
 
 import About from "./pages/About";
 import CartDetail from "./pages/CartDetail";
@@ -63,7 +63,7 @@ function App() {
     try {
       setLoading(true) // Indica que la carga ha comenzado
       setError(null);
-      const data = await fetchAllProducts();
+      const data = await getAllProducts();
       setProducts(data.products);
     } catch (err) {
       setError(err.message);

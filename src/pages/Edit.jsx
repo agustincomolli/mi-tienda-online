@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchProductById } from "../api/products";
+import { getProductById, updateProduct } from "../api/products";
 
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -19,6 +19,8 @@ export default function Edit() {
   // Estado para guardar un posible error al cargar el producto
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   /**
  * useEffect para obtener el producto cuando cambia el id.
  * Llama a la API y maneja los estados de carga y error.
@@ -28,7 +30,7 @@ export default function Edit() {
       try {
         setLoading(true);
         setError(null);   // Limpia errores anteriores
-        const data = await fetchProductById(id); // Llama a la API con el id
+        const data = await getProductById(id); // Llama a la API con el id
         setProduct(data); // Guarda el producto en el estado
       } catch (err) {
         setError(err.message); // Guarda el mensaje de error
@@ -40,6 +42,36 @@ export default function Edit() {
     getProduct();
   }, [id]);
 
+  async function handleProductUpdated(product) {
+    try {
+      setLoading(true);
+      setError(null);
+      const message = `<p class="paragraph">El producto <strong>${product.title}</strong> se actualizó correctamente</p>`
+      const result = await updateProduct(product);
+      console.log('Producto actualizado:', result);
+      await Swal.fire({
+        title: "Producto actualizado",
+        html: message,
+        icon: "success",
+        confirmButtonText: "Continuar",
+        customClass: {
+          confirmButton: 'swal-btn-confirm',
+        }
+      });
+      navigate("/admin");
+    } catch (err) {
+      setError(err.message);
+      console.error('Error al actualizar producto:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Función para manejar la cancelación de la edición
+  function handleCancel() {
+    navigate("/admin");
+  }
+
   return (
     <div className="pageContent">
       {/* Muestra spinner de carga si está cargando */}
@@ -48,7 +80,11 @@ export default function Edit() {
       {error && <ErrorMessage message={error} />}
       {/* Muestra el detalle solo si no hay carga ni error */}
       {!loading && !error && (
-        <FormProduct initialProduct={product} />
+        <FormProduct
+          initialProduct={product}
+          onProductUpdated={handleProductUpdated}
+          onCancel={handleCancel}
+        />
       )}
     </div>
   );
