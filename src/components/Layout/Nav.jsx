@@ -6,11 +6,21 @@ import styles from "./Nav.module.css"
 
 /**
  * Componente de navegación principal.
- * Muestra enlaces a distintas categorías.
+ * Muestra enlaces a distintas categorías y controla el menú hamburguesa.
+ * También gestiona el cierre de sesión del usuario.
+ *
+ * @param {Object} props - Propiedades del componente.
+ * @param {boolean} props.menuOpen - Indica si el menú está abierto.
+ * @param {function} props.setMenuOpen - Función para cambiar el estado del menú.
  */
 export default function Nav({ menuOpen, setMenuOpen }) {
-  const { currentUser, logout } = useContext(AuthContext); // Obtenemos currentUser y logout
+  // Obtenemos el usuario actual y la función de logout desde el contexto de autenticación
+  const { currentUser, logout } = useContext(AuthContext);
 
+  /**
+   * Muestra un cuadro de diálogo de confirmación para cerrar sesión.
+   * Si el usuario confirma, ejecuta el logout y muestra el resultado.
+   */
   async function handleLogout() {
     const result = await Swal.fire({
       title: '¿Estás seguro?',
@@ -41,14 +51,28 @@ export default function Nav({ menuOpen, setMenuOpen }) {
     }
   }
 
-  // Cierra el menú al hacer clic en cualquier enlace
+  /**
+   * Cierra el menú hamburguesa al hacer clic en cualquier enlace.
+   */
   function handleMenuItemClick() {
     setMenuOpen(false);
   }
 
+  /**
+   * Cierra el menú hamburguesa y ejecuta el cierre de sesión.
+   * @param {Event} e - Evento del enlace.
+   */
+  async function handleLogoutAndCloseMenu(e) {
+    e.preventDefault();
+    setMenuOpen(false);
+    await handleLogout();
+  }
+
+  // Renderizado del componente de navegación
   return (
     <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
       <ul className={styles.navMenu}>
+        {/* Enlace a la página de inicio */}
         <li>
           <Link className={`${styles.navMenuLink} ${styles.navMenuLinkIcon}`} to="/" onClick={handleMenuItemClick}>
             <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
@@ -57,28 +81,33 @@ export default function Nav({ menuOpen, setMenuOpen }) {
             <span>Inicio</span>
           </Link>
         </li>
+        {/* Enlace a productos */}
         <li>
           <Link className={styles.navMenuLink} to="/products" onClick={handleMenuItemClick}>Productos</Link>
         </li>
+        {/* Enlace a acerca de */}
         <li>
           <Link className={styles.navMenuLink} to="/about" onClick={handleMenuItemClick}>Acerca de</Link>
         </li>
+        {/* Enlace a contacto */}
         <li>
           <Link className={styles.navMenuLink} to="/contact" onClick={handleMenuItemClick}>Contacto</Link>
         </li>
+        {/* Enlace al carrito, solo visible en móvil */}
         <li className={styles.onlyMobile}>
           <Link className={styles.navMenuLink} to="/cart" onClick={handleMenuItemClick}>Carrito</Link>
         </li>
         {/* Muestra el enlace de Admin solo si el usuario está logueado */}
         {currentUser && (
-          <Link to="/admin" className={styles.navMenuLink}>
+          <Link className={styles.navMenuLink} to="/admin" onClick={handleMenuItemClick}>
             Administración
           </Link>
         )}
 
+        {/* Botón de cerrar sesión si el usuario está logueado, si no muestra iniciar sesión */}
         {currentUser ? (
           <li className={styles.logInOut}>
-            <Link className={`${styles.navMenuLink} ${styles.navMenuLinkIcon}`} to="/" onClick={handleLogout}>
+            <Link className={`${styles.navMenuLink} ${styles.navMenuLinkIcon}`} to="/" onClick={handleLogoutAndCloseMenu}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                 <path fillRule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
                 <path fillRule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
