@@ -155,8 +155,8 @@ export async function updateProduct(product) {
  * @returns {Promise<Object>} La respuesta de la API en formato JSON.
  * @throws {Error} Lanza un error si la respuesta de la API no es exitosa.
  */
-export async function deleteProduct(product) {
-  const API_URL = `https://dummyjson.com/products/${product.id}`
+export async function deleteProduct(id) {
+  const API_URL = `https://dummyjson.com/products/${id}`
   const response = await fetch(API_URL, {
     method: 'DELETE'
   })

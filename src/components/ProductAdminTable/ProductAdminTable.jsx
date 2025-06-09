@@ -33,7 +33,7 @@ export default function ProductAdminTable({ products, onDelete }) {
                   <button className="btn btn-primary" onClick={() => navigate(`/admin/edit/${product.id}`)}>
                     <i className='bx bx-edit'></i>
                   </button>
-                  <button className="btn btn-danger" onClick={() => onDelete(product)}>
+                  <button className="btn btn-danger" onClick={() => onDelete(product.id)}>
                     <i className='bx bx-trash'></i>
                   </button>
                 </td>

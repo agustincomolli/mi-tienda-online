@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts, getProductsByQuery } from "../api/products";
+import { getAllProducts, getProductsByQuery, deleteProduct } from "../api/products";
 
 import ProductAdminTable from "../components/ProductAdminTable/ProductAdminTable";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -63,6 +63,46 @@ export default function Admin() {
     navigate("/admin/add");
   }
 
+  async function handleDelete(productId) {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará el producto de forma permanente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: "swal-btn-confirm",
+        cancelButton: "swal-btn-cancel"
+      }
+    });
+
+    if (result.isConfirmed) {
+      try {
+        setLoading(true);
+        setError(null);
+        await deleteProduct(productId);
+        setProducts(products.filter(p => p.id !== productId));
+        await Swal.fire({
+          title: "Eliminado",
+          text: "El producto fue eliminado correctamente.",
+          icon: "success",
+          confirmButtonText: "OK"
+        });
+      } catch (err) {
+        setError(err.message);
+        await Swal.fire({
+          title: "Error",
+          text: "No se pudo eliminar el producto.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
+
   return (
     <div className="pageContent">
       <h2 className="heading-2">Administración de Mi Tienda Online</h2>
@@ -98,6 +138,7 @@ export default function Admin() {
         {!loading && !error && products.length > 0 && (
           <ProductAdminTable
             products={products}
+            onDelete={handleDelete}
           />
         )}
       </section>
