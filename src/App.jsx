@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { getAllProducts } from "./api/products";
 
 import About from "./pages/About";
+import Add from "./pages/Add";
 import CartDetail from "./pages/CartDetail";
 import Contact from "./pages/Contact";
 import Edit from "./pages/Edit";
@@ -139,6 +140,7 @@ function App() {
             <Route path="/cart" element={<CartDetail />} />
             <Route path="/admin" element={<Admin />}></Route>
             <Route path="/admin/edit/:id" element={<Edit />} />
+            <Route path="/admin/add" element={<Add />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />

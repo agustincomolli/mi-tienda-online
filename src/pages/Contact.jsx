@@ -1,3 +1,4 @@
+import Accordion from "../components/Accordion/Accordion";
 import Swal from 'sweetalert2';
 import styles from "./Contact.module.css"
 
@@ -51,17 +52,18 @@ export default function Contact() {
         </p>
       </section>
 
-      <section className={styles.mapContainer}>
-        <h3 className="heading-3">Nuestra Ubicación</h3>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.797334938792!2d-73.98517748486527!3d40.75889547932137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c64802a1%3A0x1c91217994825988!2sTimes%20Square!5e0!3m2!1ses!2sus!4v1680781036189!5m2!1ses!2sus"
-          allowFullScreen={true}
-          className={styles.map}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Ubicación">
-        </iframe>
-      </section>
+      <Accordion title={<span><i className="bx bx-map"></i> Nuestra Ubicación</span>}>
+        <section className={styles.mapContainer}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.797334938792!2d-73.98517748486527!3d40.75889547932137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c64802a1%3A0x1c91217994825988!2sTimes%20Square!5e0!3m2!1ses!2sus!4v1680781036189!5m2!1ses!2sus"
+            allowFullScreen={true}
+            className={styles.map}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Ubicación">
+          </iframe>
+        </section>
+      </Accordion>
     </div>
   );
 }

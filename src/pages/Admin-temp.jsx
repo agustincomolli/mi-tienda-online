@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts, getProductsByQuery } from "../api/products";
+import { addNewProduct, getAllProducts, getProductsByQuery } from "../api/products";
 
+import FormProduct from "../components/FormProduct/FormProduct";
 import ProductAdminTable from "../components/ProductAdminTable/ProductAdminTable";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import Accordion from "../components/Accordion/Accordion";
 
 import Swal from 'sweetalert2';
 
@@ -16,8 +18,8 @@ export default function Admin() {
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   /**
  * Función asíncrona para obtener los productos desde la API.
@@ -52,15 +54,43 @@ export default function Admin() {
     // El array vacío [] significa que este efecto solo se ejecuta al montar el componente
   }, [])
 
+  async function handleProductAdded(newProduct) {
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await addNewProduct(newProduct);
+      console.log('Producto agregado:', result);
+      // Opcional: actualizar la lista de productos aquí
+      await Swal.fire({
+        title: "Producto agregado",
+        html: `<p class="paragraph">El producto <strong>${result.title}</strong> se agregó con el ID: <strong>${result.id}</strong></p>`,
+        icon: "success",
+        confirmButtonText: "Continuar",
+        customClass: {
+          confirmButton: 'swal-btn-confirm',
+        }
+      });
+      navigate("/admin");
+    } catch (err) {
+      setError(err.message);
+      console.error('Error al agregar producto:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /**
+ * Función para manejar la cancelación del formulario
+ */
+  function handleCancel() {
+    navigate("/admin");
+  }
+
   function handleSearch(event) {
     event.preventDefault();
     if (searchTerm.trim()) {
       loadProducts(searchTerm);
     }
-  }
-
-  function handleAdd() {
-    navigate("/admin/add");
   }
 
   return (
@@ -70,14 +100,21 @@ export default function Admin() {
         Desde este lugar podrás administrar los productos del sitio, agregando,
         modificando o eliminado items.
       </p>
-      <section>
-        {/* Botón para agregar producto */}
-        <div className={styles.addButtonWrapper}>
-          <button className="btn btn-success" onClick={handleAdd}>
-            <i className="bx bx-plus"></i> Agregar producto
-          </button>
-        </div>
-        {/* Tabla de productos */}
+      {/* Agregar un producto nuevo */}
+      <Accordion
+        className={styles.accordion}
+        title="Agregar producto"
+      >
+        {loading && <LoadingSpinner message="Agregando productos..." />}
+        {error && <ErrorMessage message={error} />}
+        <FormProduct onProductAdded={handleProductAdded} onCancel={handleCancel} />
+      </Accordion>
+
+      {/* Tabla de productos */}
+      <Accordion
+        className={styles.accordion}
+        title="Listado de productos"
+      >
         <form onSubmit={handleSearch} className={styles.searchBar}>
           <input
             type="text"
@@ -100,7 +137,7 @@ export default function Admin() {
             products={products}
           />
         )}
-      </section>
+      </Accordion>
     </div>
   );
 }
