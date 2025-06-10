@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { addNewProduct } from "../api/products";
+import { useContext } from "react";
+import { ProductContext } from "../context/ProductContext";
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -8,8 +8,7 @@ import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import Swal from 'sweetalert2';
 
 export default function Add() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const {loading, setLoading, error, setError, addProduct} = useContext(ProductContext);
 
   const navigate = useNavigate();
 
@@ -17,7 +16,7 @@ export default function Add() {
     try {
       setLoading(true);
       setError(null);
-      const result = await addNewProduct(newProduct);
+      const result = await addProduct(newProduct);
       console.log('Producto agregado:', result);
       // Opcional: actualizar la lista de productos aquí
       await Swal.fire({

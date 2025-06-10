@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { getAllProducts } from "./api/products";
+import { ProductContext } from "./context/ProductContext";
 
 import About from "./pages/About";
 import Add from "./pages/Add";
@@ -49,40 +49,7 @@ import 'boxicons/css/boxicons.min.css';
 function App() {
   // Estado para mostrar u ocultar el carrito de compras.
   const [showCart, setShowCart] = useState(false);
-  // Estado para almacenar los productos traídos de la API
-  const [products, setProducts] = useState([])
-  // Estado para indicar si se están cargando los productos
-  const [loading, setLoading] = useState(false)
-  // Estado para guardar un posible error al cargar los productos
-  const [error, setError] = useState(null)
-
-  /**
-   * Función asíncrona para obtener los productos desde la API.
-   * Maneja el estado de carga y posibles errores.
-   */
-  async function loadProducts() {
-    try {
-      setLoading(true) // Indica que la carga ha comenzado
-      setError(null);
-      const data = await getAllProducts();
-      setProducts(data.products);
-    } catch (err) {
-      setError(err.message);
-      console.error('Error al cargar productos:', err);
-      setProducts([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  /**
-   * Obtiene los productos desde la API al montar el componente.
-   * Maneja los estados de carga y error.
-   */
-  useEffect(() => {
-    loadProducts();
-    // El array vacío [] significa que este efecto solo se ejecuta al montar el componente
-  }, [])
+  const { products, loading, error } = useContext(ProductContext);
 
   /**
    * Alterna la visibilidad del carrito de compras.

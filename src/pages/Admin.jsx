@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts, getProductsByQuery, deleteProduct } from "../api/products";
+import { ProductContext } from "../context/ProductContext";
 
 import ProductAdminTable from "../components/ProductAdminTable/ProductAdminTable";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -12,50 +12,31 @@ import styles from "./Admin.module.css";
 
 
 export default function Admin() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [products, setProducts] = useState([]);
+  const {
+    products,
+    loading,
+    error,
+    setError,
+    setLoading,
+    setProducts,
+    getProductsByQuery,
+    removeProduct
+  } = useContext(ProductContext);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-
-  /**
- * Función asíncrona para obtener los productos desde la API.
- * Maneja el estado de carga y posibles errores.
- */
-  async function loadProducts(query = "") {
+  async function handleSearch(event) {
+    event.preventDefault();
     try {
-      setLoading(true) // Indica que la carga ha comenzado
+      setLoading(true);
       setError(null);
-      let data;
-      if (query.trim().length === 0) {
-        data = await getAllProducts();
-      } else {
-        data = await getProductsByQuery({ q: query });
-      }
+      const data = await getProductsByQuery({ q: searchTerm });
       setProducts(data.products);
     } catch (err) {
       setError(err.message);
-      console.error('Error al cargar productos:', err);
       setProducts([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  /**
-   * Obtiene los productos desde la API al montar el componente.
-   * Maneja los estados de carga y error.
-   */
-  useEffect(() => {
-    loadProducts();
-    // El array vacío [] significa que este efecto solo se ejecuta al montar el componente
-  }, [])
-
-  function handleSearch(event) {
-    event.preventDefault();
-    if (searchTerm.trim()) {
-      loadProducts(searchTerm);
     }
   }
 
@@ -81,8 +62,7 @@ export default function Admin() {
       try {
         setLoading(true);
         setError(null);
-        await deleteProduct(productId);
-        setProducts(products.filter(p => p.id !== productId));
+        await removeProduct(productId);
         await Swal.fire({
           title: "Eliminado",
           text: "El producto fue eliminado correctamente.",

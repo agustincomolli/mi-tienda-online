@@ -1,6 +1,6 @@
+import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getProductById, updateProduct } from "../api/products";
+import { ProductContext } from "../context/ProductContext";
 
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -9,17 +9,13 @@ import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import Swal from 'sweetalert2';
 
 export default function Edit() {
+  const { getProductById, editProduct } = useContext(ProductContext);
   // Obtiene el parámetro 'id' de la URL
   const { id } = useParams();
-
-  // Estado para almacenar el producto obtenido
-  const [product, setProduct] = useState({});
-  // Estado para indicar si se está cargando el producto
-  const [loading, setLoading] = useState(false);
-  // Estado para guardar un posible error al cargar el producto
-  const [error, setError] = useState(null);
-
   const navigate = useNavigate();
+  const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   /**
  * useEffect para obtener el producto cuando cambia el id.
@@ -40,14 +36,14 @@ export default function Edit() {
       }
     };
     getProduct();
-  }, [id]);
+  }, [id, getProductById]);
 
   async function handleProductUpdated(product) {
     try {
       setLoading(true);
       setError(null);
       const message = `<p class="paragraph">El producto <strong>${product.title}</strong> se actualizó correctamente</p>`
-      const result = await updateProduct(product);
+      const result = await editProduct(product);
       console.log('Producto actualizado:', result);
       await Swal.fire({
         title: "Producto actualizado",
