@@ -211,9 +211,9 @@ export default function Login() {
         <p className="paragraph">¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
         <p className="paragraph">
           <small>
-            <strong>Credenciales de prueba (registra uno nuevo):</strong><br />
-            Email: prueba@example.com<br />
-            Contraseña: 123456
+            <strong>Credenciales de administrador:</strong><br />
+            Email: admin@mi-tienda-online.com<br />
+            Contraseña: mi tienda online
           </small>
         </p>
       </div>
