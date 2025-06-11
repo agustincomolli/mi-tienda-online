@@ -66,9 +66,12 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  const ADMIN_UID = "eFvN9qM9auR9SJQ1nys9s1v6UP73";
+
   // El valor que se proveerá a los componentes hijos
   const authContextValue = {
     currentUser, // El usuario autenticado (o null)
+    isAdmin: currentUser?.uid === ADMIN_UID,
     loadingAuth, // Si la autenticación inicial aún está cargando
     signup,      // Función para registrar
     login,       // Función para iniciar sesión

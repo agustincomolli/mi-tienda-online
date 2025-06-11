@@ -1,7 +1,9 @@
-import styles from "./ProductCard.module.css"
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { AuthContext } from "../../context/AuthContext";
+
+import styles from "./ProductCard.module.css"
 
 /**
  * Componente que representa un solo producto.
@@ -10,8 +12,9 @@ import { CartContext } from "../../context/CartContext";
  * @param {Object} props - Propiedades del componente.
  * @param {Object} props.product - Objeto con los datos del producto.
  */
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onEdit, onDelete }) {
     const { addToCart } = useContext(CartContext)
+    const { currentUser, isAdmin } = useContext(AuthContext);
 
     function handleClick(event) {
         event.stopPropagation(); // Evita que el click en el botón navegue
@@ -29,8 +32,21 @@ export default function ProductCard({ product }) {
             {/* Footer: precio y botón */}
             <div className={styles.productCardFooter}>
                 <p className="paragraph">$ {product.price}</p>
-                <button className={`btn btn-success`} onClick={handleClick}>Agregar al Carrito</button>
+                {currentUser && isAdmin ? (
+                    <div className={styles.buttonWrapper}>
+                        <button className="btn btn-primary" onClick={() => onEdit(product.id)}>
+                            <i className='bx bx-edit'></i> Editar
+                        </button>
+                        <button className="btn btn-danger" onClick={() => onDelete(product.id)}>
+                            <i className='bx bx-trash'></i> Eliminar
+                        </button>
+                    </div>
+                ) : (
+                    <button className={`btn btn-success`} onClick={handleClick}>
+                        Agregar al Carrito
+                    </button>
+                )}
             </div>
-        </div>
+        </div >
     );
 }

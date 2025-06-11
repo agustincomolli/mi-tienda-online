@@ -105,7 +105,7 @@ function App() {
           {/* Ruta protegida, hay que iniciar sesión para acceder */}
           <Route element={<PrivateRoute />}>
             <Route path="/cart" element={<CartDetail />} />
-            <Route path="/admin" element={<Admin />}></Route>
+            {/* <Route path="/admin" element={<Admin />}></Route> */}
             <Route path="/admin/edit/:id" element={<Edit />} />
             <Route path="/admin/add" element={<Add />} />
           </Route>

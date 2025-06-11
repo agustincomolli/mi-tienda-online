@@ -8,7 +8,7 @@ import styles from "./ProductList.module.css"
  * @param {Object} props - Propiedades del componente.
  * @param {Array} props.products - Lista de productos a mostrar.
  */
-export default function ProductList({ products }) {
+export default function ProductList({ products, onEdit, onDelete }) {
     return (
         <div className={styles.productsGrid}>
             {/* Itera sobre el array de productos y renderiza un componente ProductCard por cada uno */}
@@ -16,6 +16,8 @@ export default function ProductList({ products }) {
                 <ProductCard
                     key={product.id}
                     product={product}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
                 />
             ))}
         </div>

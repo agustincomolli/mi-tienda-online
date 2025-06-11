@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default function PrivateRoute() {
-  const { currentUser, loadingAuth } = useContext(AuthContext); // Obtenemos el usuario y el estado de carga
+  const { currentUser, loadingAuth, isAdmin } = useContext(AuthContext); // Obtenemos el usuario y el estado de carga
   const location = useLocation();
 
   if (loadingAuth) {
@@ -16,6 +16,11 @@ export default function PrivateRoute() {
   if (!currentUser) {
     // Almacena la ubicación actual para redirigir después de iniciar sesión
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Ruta admin protegida adicionalmente
+  if (location.pathname.startsWith("/admin") && !isAdmin) {
+    return <Navigate to="/" replace />;
   }
 
   // Si hay un usuario autenticado, renderiza las rutas anidadas

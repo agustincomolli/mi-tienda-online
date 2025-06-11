@@ -97,12 +97,6 @@ export default function Nav({ menuOpen, setMenuOpen }) {
         <li className={styles.onlyMobile}>
           <Link className={styles.navMenuLink} to="/cart" onClick={handleMenuItemClick}>Carrito</Link>
         </li>
-        {/* Muestra el enlace de Admin solo si el usuario está logueado */}
-        {currentUser && (
-          <Link className={styles.navMenuLink} to="/admin" onClick={handleMenuItemClick}>
-            Administración
-          </Link>
-        )}
 
         {/* Botón de cerrar sesión si el usuario está logueado, si no muestra iniciar sesión */}
         {currentUser ? (

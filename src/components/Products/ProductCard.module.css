@@ -50,3 +50,11 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  justify-content: flex-start;
+}

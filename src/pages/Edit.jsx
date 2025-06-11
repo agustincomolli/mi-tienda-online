@@ -54,7 +54,7 @@ export default function Edit() {
           confirmButton: 'swal-btn-confirm',
         }
       });
-      navigate("/admin");
+      navigate("/products");
     } catch (err) {
       setError(err.message);
       console.error('Error al actualizar producto:', err);
@@ -65,7 +65,7 @@ export default function Edit() {
 
   // Función para manejar la cancelación de la edición
   function handleCancel() {
-    navigate("/admin");
+    navigate("/products");
   }
 
   return (

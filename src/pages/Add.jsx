@@ -28,7 +28,7 @@ export default function Add() {
           confirmButton: 'swal-btn-confirm',
         }
       });
-      navigate("/admin");
+      navigate("/products");
     } catch (err) {
       setError(err.message);
       console.error('Error al agregar producto:', error);
@@ -41,7 +41,7 @@ export default function Add() {
  * Función para manejar la cancelación del formulario
  */
   function handleCancel() {
-    navigate("/admin");
+    navigate("/products");
   }
 
   return (
