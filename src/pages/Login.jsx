@@ -33,7 +33,10 @@ export default function Login() {
         icon: "warning",
         title: "Campos requeridos",
         text: "Por favor, complete todos los campos",
-        confirmButtonText: "Entendido"
+        confirmButtonText: "Entendido",
+        customClass: {
+          confirmButton: "swal-btn-confirm",
+        }
       });
       return;
     }
@@ -93,7 +96,10 @@ export default function Login() {
         icon: "error",
         title: "Error inesperado",
         text: "Hubo un problema al intentar iniciar sesión. Por favor, intente de nuevo.",
-        confirmButtonText: "Reintentar"
+        confirmButtonText: "Reintentar",
+        customClass: {
+          confirmButton: "swal-btn-confirm",
+        }
       });
     }
   }
@@ -148,7 +154,10 @@ export default function Login() {
         icon: "error",
         title: "Error inesperado",
         text: "Hubo un problema al intentar iniciar sesión con este proveedor. Por favor, intente de nuevo.",
-        confirmButtonText: "Reintentar"
+        confirmButtonText: "Reintentar",
+        customClass: {
+          confirmButton: "swal-btn-confirm",
+        }
       });
     }
   }

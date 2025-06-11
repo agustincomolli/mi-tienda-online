@@ -27,26 +27,34 @@ export default function Nav({ menuOpen, setMenuOpen }) {
       text: "¿Quieres cerrar tu sesión actual?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#28a745',
-      cancelButtonColor: '#dc3545',
       confirmButtonText: 'Sí, cerrar sesión',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: "swal-btn-confirm",
+        cancelButton: "swal-btn-cancel"
+      }
     });
 
     if (result.isConfirmed) {
       const logoutResult = await logout();
       if (logoutResult.success) {
-        Swal.fire(
-          '¡Sesión cerrada!',
-          'Has cerrado tu sesión con éxito.',
-          'success'
-        );
+        Swal.fire({
+          title: '¡Sesión cerrada!',
+          text: 'Has cerrado tu sesión con éxito.',
+          icon: 'success',
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
+        });
       } else {
-        Swal.fire(
-          'Error',
-          `No se pudo cerrar la sesión: ${logoutResult.error}`,
-          'error'
-        );
+        Swal.fire({
+          title: 'Error',
+          text: `No se pudo cerrar la sesión: ${logoutResult.error}`,
+          icon: 'error',
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
+        });
       }
     }
   }

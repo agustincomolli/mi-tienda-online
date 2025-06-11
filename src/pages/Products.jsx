@@ -67,7 +67,10 @@ export default function Products() {
           title: "Eliminado",
           text: "El producto fue eliminado correctamente.",
           icon: "success",
-          confirmButtonText: "OK"
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
         });
       } catch (err) {
         setError(err.message);
@@ -75,7 +78,10 @@ export default function Products() {
           title: "Error",
           text: "No se pudo eliminar el producto.",
           icon: "error",
-          confirmButtonText: "OK"
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
         });
       } finally {
         setLoading(false);
