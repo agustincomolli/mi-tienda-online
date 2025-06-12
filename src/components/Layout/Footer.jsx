@@ -24,9 +24,10 @@ export default function Footer() {
             <div className="useful-links">
                 <h4>Enlaces Útiles</h4>
                 <ul>
-                    <li><Link to="/terms" className={styles.footerLink}>Términos y Condiciones</Link></li>
-                    <li><Link to="/policies" className={styles.footerLink}>Política de Privacidad</Link></li>
-                    <li><Link to="faq" className={styles.footerLink}>Preguntas Frecuentes</Link></li>
+                    {/* Al utilizar  onClick={() => window.scrollTo(0, 0)} en los Link se va a la parte superior de la pantalla */}
+                    <li><Link to="/terms" className={styles.footerLink} onClick={() => window.scrollTo(0, 0)}>Términos y Condiciones</Link></li>
+                    <li><Link to="/policies" className={styles.footerLink} onClick={() => window.scrollTo(0, 0)}>Política de Privacidad</Link></li>
+                    <li><Link to="faq" className={styles.footerLink} onClick={() => window.scrollTo(0, 0)}>Preguntas Frecuentes</Link></li>
                 </ul>
             </div>
             <div className={styles.copyright}>
