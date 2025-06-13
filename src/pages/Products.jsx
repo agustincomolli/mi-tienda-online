@@ -2,7 +2,10 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ProductContext } from "../context/ProductContext";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import ProductList from "../components/Products/ProductList";
+import Paginator from "../components/Paginator/Paginator";
 import Swal from 'sweetalert2';
 
 import styles from "./Products.module.css";
@@ -11,9 +14,13 @@ export default function Products() {
   const { currentUser, isAdmin } = useContext(AuthContext);
   const {
     products,
+    loading,
+    error,
     removeProduct,
-    setLoading,
-    setError
+    page,
+    setPage,
+    limit,
+    total
   } = useContext(ProductContext);
 
   const navigate = useNavigate();
@@ -60,8 +67,6 @@ export default function Products() {
 
     if (result.isConfirmed) {
       try {
-        setLoading(true);
-        setError(null);
         await removeProduct(id);
         await Swal.fire({
           title: "Eliminado",
@@ -72,8 +77,7 @@ export default function Products() {
             confirmButton: "swal-btn-confirm",
           }
         });
-      } catch (err) {
-        setError(err.message);
+      } catch {
         await Swal.fire({
           title: "Error",
           text: "No se pudo eliminar el producto.",
@@ -83,38 +87,48 @@ export default function Products() {
             confirmButton: "swal-btn-confirm",
           }
         });
-      } finally {
-        setLoading(false);
       }
     }
   }
 
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div className="pageContent">
-      {currentUser && isAdmin ? (
+      {loading && <LoadingSpinner message="Cargando productos..." />}
+      {error && <ErrorMessage message={error} />}
+      {!loading && !error && (
         <>
-          <h2 className="heading-2">Administración de Mi Tienda Online</h2>
-          <p className="paragraph">
-            Desde este lugar podrás administrar los productos del sitio, agregando,
-            modificando o eliminado items.
-          </p>
-          {/* Botón para agregar producto */}
-          <div className={styles.addButtonWrapper}>
-            <button className="btn btn-success" onClick={handleAdd}>
-              <i className="bx bx-plus"></i> Agregar producto
-            </button>
-          </div>
+          {currentUser && isAdmin ? (
+            <>
+              <h2 className="heading-2">Administración de Mi Tienda Online</h2>
+              <p className="paragraph">
+                Desde este lugar podrás administrar los productos del sitio, agregando,
+                modificando o eliminado items.
+              </p>
+              {/* Botón para agregar producto */}
+              <div className={styles.addButtonWrapper}>
+                <button className="btn btn-success" onClick={handleAdd}>
+                  <i className="bx bx-plus"></i> Agregar producto
+                </button>
+              </div>
+            </>
+          ) : (
+            <h2 className={styles.title}>Productos Disponibles</h2>
+          )}
+          {/* Lista de productos, recibe la función para agregar al carrito */}
+          <ProductList
+            products={products}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+          <Paginator
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+          />
         </>
-      ) : (
-        <h2 className={styles.title}>Productos Disponibles</h2>
       )}
-      {/* Lista de productos, recibe la función para agregar al carrito */}
-      <ProductList
-        products={products}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
     </div>
   )
 }

@@ -45,15 +45,23 @@ export async function getProductById(id) {
  * @param {string} [params.category] - Categoría.
  * @returns {Promise<Object>} Productos filtrados.
  */
-export async function getProductsByQuery({ q = "", category = "" } = {}) {
+export async function getProductsByQuery({ q = "", category = "", limit, skip } = {}) {
   let api_url = "https://dummyjson.com/products";
+  const params = new URLSearchParams();
+
+  if (limit !== undefined) params.append("limit", limit);
+  if (skip !== undefined) params.append("skip", skip);
+
   if (category) {
     api_url = `https://dummyjson.com/products/category/${encodeURIComponent(category)}`;
-    if (q) api_url += `?q=${encodeURIComponent(q)}`;
+    if (q) params.append("q", q);
   } else if (q) {
-    api_url += `/search?q=${encodeURIComponent(q)}`;
+    api_url += `/search`;
+    params.append("q", q);
   }
-  const response = await fetch(api_url);
+
+  const url = params.toString() ? `${api_url}?${params.toString()}` : api_url;
+  const response = await fetch(url);
   if (!response.ok) throw new Error("Error al buscar productos");
   return response.json();
 }

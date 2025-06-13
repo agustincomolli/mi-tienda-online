@@ -16,17 +16,23 @@ export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [limit] = useState(12); // cantidad de productos por página
 
 
-  async function loadProducts() {
+  async function loadProducts({ page = 1, limit = 12 } = {}) {
     setLoading(true);
     setError(null);
     try {
-      const data = await getAllProducts();
+      const skip = (page - 1) * limit;
+      const data = await getProductsByQuery({ limit, skip });
       setProducts(data.products);
+      setTotal(data.total);
     } catch (err) {
       setError(err.message);
       setProducts([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
@@ -52,8 +58,8 @@ export function ProductProvider({ children }) {
   }
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    loadProducts({ page, limit });
+  }, [page, limit]);
 
   return (
     <ProductContext.Provider value={{
@@ -62,6 +68,10 @@ export function ProductProvider({ children }) {
       loading,
       setLoading,
       error,
+      page,
+      setPage,
+      limit,
+      total,
       setError,
       getAllProducts,
       getFeaturedProducts,

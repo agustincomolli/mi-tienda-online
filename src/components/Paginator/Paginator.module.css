@@ -1,0 +1,60 @@
+/* Estilos móviles y generales */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.pagination ul {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pageNumbers,
+.prev,
+.next {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pageNumbers:hover,
+.prev:hover,
+.next:hover {
+  background: var(--color-primary);
+  color: var(--text-light);
+}
+
+.active {
+  background: var(--color-primary);
+  color: var(--text-light);
+  border-color: var(--color-primary);
+  font-weight: bold;
+  cursor: default;
+}
+
+.prev[disabled],
+.next[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile first: por defecto muestra solo 3 botones */
+.hiddenOnMobile {
+  display: none;
+}
+
+/* Tablets y pantallas medianas (768px+) */
+@media (min-width: 768px) {
+  .hiddenOnMobile {
+    display: block;
+  }
+}
