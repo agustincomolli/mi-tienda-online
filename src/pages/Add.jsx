@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -8,7 +9,7 @@ import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import Swal from 'sweetalert2';
 
 export default function Add() {
-  const {loading, setLoading, error, setError, addProduct} = useContext(ProductContext);
+  const { loading, setLoading, error, setError, addProduct } = useContext(ProductContext);
 
   const navigate = useNavigate();
 
@@ -45,10 +46,17 @@ export default function Add() {
   }
 
   return (
-    <div className="pageContent">
-      {loading && <LoadingSpinner message="Agregando productos..." />}
-      {error && <ErrorMessage message={error} />}
-      <FormProduct onProductAdded={handleProductAdded} onCancel={handleCancel} />
-    </div>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Agregar producto</title>
+        <meta name="description" content="Agrega un nuevo producto." />
+      </Helmet>
+
+      <div className="pageContent">
+        {loading && <LoadingSpinner message="Agregando productos..." />}
+        {error && <ErrorMessage message={error} />}
+        <FormProduct onProductAdded={handleProductAdded} onCancel={handleCancel} />
+      </div>
+    </>
   );
 }

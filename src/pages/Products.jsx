@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ProductContext } from "../context/ProductContext";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import ProductList from "../components/Products/ProductList";
@@ -94,41 +95,47 @@ export default function Products() {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="pageContent">
-      {loading && <LoadingSpinner message="Cargando productos..." />}
-      {error && <ErrorMessage message={error} />}
-      {!loading && !error && (
-        <>
-          {currentUser && isAdmin ? (
-            <>
-              <h2 className="heading-2">Administración de Mi Tienda Online</h2>
-              <p className="paragraph">
-                Desde este lugar podrás administrar los productos del sitio, agregando,
-                modificando o eliminado items.
-              </p>
-              {/* Botón para agregar producto */}
-              <div className={styles.addButtonWrapper}>
-                <button className="btn btn-success" onClick={handleAdd}>
-                  <i className="bx bx-plus"></i> Agregar producto
-                </button>
-              </div>
-            </>
-          ) : (
-            <h2 className={styles.title}>Productos Disponibles</h2>
-          )}
-          {/* Lista de productos, recibe la función para agregar al carrito */}
-          <ProductList
-            products={products}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-          <Paginator
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
-        </>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Productos</title>
+      </Helmet>
+
+      <div className="pageContent">
+        {loading && <LoadingSpinner message="Cargando productos..." />}
+        {error && <ErrorMessage message={error} />}
+        {!loading && !error && (
+          <>
+            {currentUser && isAdmin ? (
+              <>
+                <h2 className="heading-2">Administración de Mi Tienda Online</h2>
+                <p className="paragraph">
+                  Desde este lugar podrás administrar los productos del sitio, agregando,
+                  modificando o eliminado items.
+                </p>
+                {/* Botón para agregar producto */}
+                <div className={styles.addButtonWrapper}>
+                  <button className="btn btn-success" onClick={handleAdd}>
+                    <i className="bx bx-plus"></i> Agregar producto
+                  </button>
+                </div>
+              </>
+            ) : (
+              <h2 className={styles.title}>Productos Disponibles</h2>
+            )}
+            {/* Lista de productos, recibe la función para agregar al carrito */}
+            <ProductList
+              products={products}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+            <Paginator
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          </>
+        )}
+      </div>
+    </>
   )
 }

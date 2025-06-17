@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { AuthContext } from "../context/AuthContext";
+import { Helmet } from '@dr.pogodin/react-helmet';
 import styles from "./Register.module.css"; // Asegúrate de tener este archivo CSS
 
 export default function Register() {
@@ -108,43 +109,49 @@ export default function Register() {
   }
 
   return (
-    <div className={styles.registerContent}>
-      <h2 className="heading-2">Registrarse</h2>
-      <form className={styles.registerForm} onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          name="email"
-          required
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña (mínimo 6 caracteres)"
-          required
-          autoComplete="new-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirmar contraseña"
-          required
-          autoComplete="new-password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button
-          className={`btn btn-primary ${styles.registerButton}`}
-          type="submit"
-        >
-          Registrarse
-        </button>
-      </form>
-    </div>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Registrarse</title>
+      </Helmet>
+
+      <div className={styles.registerContent}>
+        <h2 className="heading-2">Registrarse</h2>
+        <form className={styles.registerForm} onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            name="email"
+            required
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña (mínimo 6 caracteres)"
+            required
+            autoComplete="new-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirmar contraseña"
+            required
+            autoComplete="new-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <button
+            className={`btn btn-primary ${styles.registerButton}`}
+            type="submit"
+          >
+            Registrarse
+          </button>
+        </form>
+      </div>
+    </>
   );
 }

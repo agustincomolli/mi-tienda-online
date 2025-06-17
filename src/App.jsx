@@ -16,7 +16,6 @@ import Products from "./pages/Products";
 import SearchResults from "./pages/SearchResults";
 import ProductDetail from "./pages/ProductDetail";
 import Terms from "./pages/Terms";
-import Admin from "./pages/Admin";
 import Register from "./pages/Register";
 
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";

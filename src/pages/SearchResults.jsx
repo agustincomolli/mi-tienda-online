@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getProductsByQuery, getNewProducts, getOfferts } from "../api/products";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 import ProductList from "../components/Products/ProductList";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -44,16 +45,22 @@ export default function SearchResults() {
     getSearchResults();
   }, [query, category, mode]);
   return (
-    <div className="pageContent">
-      <h2 className={styles.title}>Resultados de búsqueda</h2>
-      {loading && <LoadingSpinner message="Buscando productos..." />}
-      {error && <ErrorMessage message={error} />}
-      {!loading && !error && products.length === 0 && (
-        <p className={styles.message}>No se encontraron productos.</p>
-      )}
-      {!loading && !error && products.length > 0 && (
-        <ProductList products={products} />
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Resultados</title>
+      </Helmet>
+
+      <div className="pageContent">
+        <h2 className={styles.title}>Resultados de búsqueda</h2>
+        {loading && <LoadingSpinner message="Buscando productos..." />}
+        {error && <ErrorMessage message={error} />}
+        {!loading && !error && products.length === 0 && (
+          <p className={styles.message}>No se encontraron productos.</p>
+        )}
+        {!loading && !error && products.length > 0 && (
+          <ProductList products={products} />
+        )}
+      </div>
+    </>
   );
 }

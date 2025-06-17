@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { AuthContext } from "../context/AuthContext";
+import { Helmet } from '@dr.pogodin/react-helmet';
 import styles from "./Login.module.css";
 
 /**
@@ -164,68 +165,74 @@ export default function Login() {
 
   // Renderizado del formulario de login y botones sociales
   return (
-    <div className={styles.loginContent}>
-      <h2 className="heading-2">Iniciar sesión</h2>
-      {/* Formulario de login */}
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
-        <input
-          type="email" // Campo de correo electrónico
-          placeholder="Correo electrónico"
-          name="email"
-          required
-          autoComplete="email"
-          onChange={(e) => { setEmail(e.target.value) }}
-          value={email}
-        />
-        <input
-          type="password" // Campo de contraseña
-          name="password"
-          placeholder="Contraseña"
-          required
-          autoComplete="current-password"
-          onChange={(e) => { setPassword(e.target.value) }}
-          value={password}
-        />
-        <button
-          className={`btn btn-primary ${styles.loginButton}`}
-          type="submit"
-        >
-          Iniciar sesión
-        </button>
-      </form>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Iniciar sesión</title>
+      </Helmet>
 
-      {/* Login social */}
-      <div className={styles.socialLoginContainer}>
-        <p className={styles.socialLoginText}>O inicia sesión con:</p>
-        <div className={styles.socialButtons}>
+      <div className={styles.loginContent}>
+        <h2 className="heading-2">Iniciar sesión</h2>
+        {/* Formulario de login */}
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <input
+            type="email" // Campo de correo electrónico
+            placeholder="Correo electrónico"
+            name="email"
+            required
+            autoComplete="email"
+            onChange={(e) => { setEmail(e.target.value) }}
+            value={email}
+          />
+          <input
+            type="password" // Campo de contraseña
+            name="password"
+            placeholder="Contraseña"
+            required
+            autoComplete="current-password"
+            onChange={(e) => { setPassword(e.target.value) }}
+            value={password}
+          />
           <button
-            className={`${styles.socialButton} ${styles.googleButton}`}
-            onClick={() => handleSocialLogin(loginGoogle)}
-            aria-label="Iniciar sesión con Google"
+            className={`btn btn-primary ${styles.loginButton}`}
+            type="submit"
           >
-            {/* Icono SVG multicolor de Google */}
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22.449 12.224C22.449 11.455 22.385 10.686 22.257 9.929H12.24V14.152H17.917C17.653 15.586 16.804 16.787 15.659 17.575L15.632 17.755L19.062 20.373L19.262 20.386C21.365 18.497 22.449 15.674 22.449 12.224Z" fill="#4285F4" />
-              <path d="M12.24 22.999C15.044 22.999 17.447 22.062 19.262 20.386L15.659 17.575C14.708 18.211 13.563 18.625 12.24 18.625C9.712 18.625 7.573 16.949 6.785 14.619L6.758 14.776L3.149 17.551L3.042 17.585C4.808 21.015 8.204 22.999 12.24 22.999Z" fill="#34A853" />
-              <path d="M6.785 14.619C6.592 14.078 6.486 13.487 6.486 12.883C6.486 12.279 6.592 11.688 6.785 11.147L6.758 10.979L3.042 8.196L3.149 8.162C2.458 9.516 2.072 11.127 2.072 12.883C2.072 14.639 2.458 16.25 3.149 17.585L6.785 14.619Z" fill="#FBBC05" />
-              <path d="M12.24 6.756C13.626 6.756 14.887 7.232 15.894 8.11L19.349 4.655C17.447 2.979 15.044 2.042 12.24 2.042C8.204 2.042 4.808 4.026 3.042 7.456L6.785 10.322C7.573 7.992 9.712 6.756 12.24 6.756Z" fill="#EA4335" />
-            </svg>
-            Google
+            Iniciar sesión
           </button>
+        </form>
+
+        {/* Login social */}
+        <div className={styles.socialLoginContainer}>
+          <p className={styles.socialLoginText}>O inicia sesión con:</p>
+          <div className={styles.socialButtons}>
+            <button
+              className={`${styles.socialButton} ${styles.googleButton}`}
+              onClick={() => handleSocialLogin(loginGoogle)}
+              aria-label="Iniciar sesión con Google"
+            >
+              {/* Icono SVG multicolor de Google */}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.449 12.224C22.449 11.455 22.385 10.686 22.257 9.929H12.24V14.152H17.917C17.653 15.586 16.804 16.787 15.659 17.575L15.632 17.755L19.062 20.373L19.262 20.386C21.365 18.497 22.449 15.674 22.449 12.224Z" fill="#4285F4" />
+                <path d="M12.24 22.999C15.044 22.999 17.447 22.062 19.262 20.386L15.659 17.575C14.708 18.211 13.563 18.625 12.24 18.625C9.712 18.625 7.573 16.949 6.785 14.619L6.758 14.776L3.149 17.551L3.042 17.585C4.808 21.015 8.204 22.999 12.24 22.999Z" fill="#34A853" />
+                <path d="M6.785 14.619C6.592 14.078 6.486 13.487 6.486 12.883C6.486 12.279 6.592 11.688 6.785 11.147L6.758 10.979L3.042 8.196L3.149 8.162C2.458 9.516 2.072 11.127 2.072 12.883C2.072 14.639 2.458 16.25 3.149 17.585L6.785 14.619Z" fill="#FBBC05" />
+                <path d="M12.24 6.756C13.626 6.756 14.887 7.232 15.894 8.11L19.349 4.655C17.447 2.979 15.044 2.042 12.24 2.042C8.204 2.042 4.808 4.026 3.042 7.456L6.785 10.322C7.573 7.992 9.712 6.756 12.24 6.756Z" fill="#EA4335" />
+              </svg>
+              Google
+            </button>
+          </div>
+        </div>
+
+        {/* Ayuda y registro */}
+        <div className={styles.loginHelp}>
+          <p className="paragraph">¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
+          <p className="paragraph">
+            <small>
+              <strong>Credenciales de administrador:</strong><br />
+              Email: admin@mi-tienda-online.com<br />
+              Contraseña: mi tienda online
+            </small>
+          </p>
         </div>
       </div>
-
-      {/* Ayuda y registro */}
-      <div className={styles.loginHelp}>
-        <p className="paragraph">¿No tienes una cuenta? <Link to="/register" className='link'>Regístrate aquí</Link></p>
-        <p className="paragraph">
-          <small>
-            <strong>Credenciales de administrador:</strong><br />
-            Email: admin@mi-tienda-online.com<br />
-            Contraseña: mi tienda online
-          </small>
-        </p>
-      </div>
-    </div>
+    </>
   );
 }

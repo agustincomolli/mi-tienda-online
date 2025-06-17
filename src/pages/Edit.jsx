@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 import FormProduct from "../components/FormProduct/FormProduct";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -69,19 +70,25 @@ export default function Edit() {
   }
 
   return (
-    <div className="pageContent">
-      {/* Muestra spinner de carga si está cargando */}
-      {loading && <LoadingSpinner message="Cargando productos.." />}
-      {/* Muestra mensaje de error si hay error */}
-      {error && <ErrorMessage message={error} />}
-      {/* Muestra el detalle solo si no hay carga ni error */}
-      {!loading && !error && (
-        <FormProduct
-          initialProduct={product}
-          onProductUpdated={handleProductUpdated}
-          onCancel={handleCancel}
-        />
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Editar producto</title>
+      </Helmet>
+
+      <div className="pageContent">
+        {/* Muestra spinner de carga si está cargando */}
+        {loading && <LoadingSpinner message="Cargando productos.." />}
+        {/* Muestra mensaje de error si hay error */}
+        {error && <ErrorMessage message={error} />}
+        {/* Muestra el detalle solo si no hay carga ni error */}
+        {!loading && !error && (
+          <FormProduct
+            initialProduct={product}
+            onProductUpdated={handleProductUpdated}
+            onCancel={handleCancel}
+          />
+        )}
+      </div>
+    </>
   );
 }

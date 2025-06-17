@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { getProductById } from "../api/products";
 import { CartContext } from "../context/CartContext";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
@@ -99,35 +100,41 @@ export default function ProductDetail() {
 
   // Renderizado del componente
   return (
-    <div className="pageContent">
-      {/* Muestra spinner de carga si está cargando */}
-      {loading && <LoadingSpinner message="Cargando productos.." />}
-      {/* Muestra mensaje de error si hay error */}
-      {error && <ErrorMessage message={error} />}
-      {/* Muestra el detalle solo si no hay carga ni error */}
-      {!loading && !error && (
-        <section className={styles.productDetail}>
-          <img src={product.thumbnail} alt={product.title} />
-          <div className={styles.productInfo}>
-            <h2 className="product-name">{product.title}</h2>
-            <p className="description">{product.description}</p>
-            <p className="price"><strong>Precio:</strong> $ {product.price}</p>
-            <p className="category">
-              <strong>Categoría:</strong>{" "}
-              {product.category && toTitleCase(product.category)}
-            </p>
-            <p className="brand"><strong>Marca:</strong> {product.brand}</p>
-            <p className="rating">
-              <strong>Calificación:</strong> {product.rating}{" "}
-              <span>{renderStars(product.rating)}</span>
-            </p>
-            <div className={styles.ButtonsWrapper}>
-              <button className="btn btn-success" onClick={handleClick}>Agregar al carrito</button>
-              <Link className="btn btn-primary" to="/">Volver al Inicio</Link>
+    <>
+      <Helmet>
+        <title>Mi Tienda Online | Detalles</title>
+      </Helmet>
+
+      <div className="pageContent">
+        {/* Muestra spinner de carga si está cargando */}
+        {loading && <LoadingSpinner message="Cargando productos.." />}
+        {/* Muestra mensaje de error si hay error */}
+        {error && <ErrorMessage message={error} />}
+        {/* Muestra el detalle solo si no hay carga ni error */}
+        {!loading && !error && (
+          <section className={styles.productDetail}>
+            <img src={product.thumbnail} alt={product.title} />
+            <div className={styles.productInfo}>
+              <h2 className="product-name">{product.title}</h2>
+              <p className="description">{product.description}</p>
+              <p className="price"><strong>Precio:</strong> $ {product.price}</p>
+              <p className="category">
+                <strong>Categoría:</strong>{" "}
+                {product.category && toTitleCase(product.category)}
+              </p>
+              <p className="brand"><strong>Marca:</strong> {product.brand}</p>
+              <p className="rating">
+                <strong>Calificación:</strong> {product.rating}{" "}
+                <span>{renderStars(product.rating)}</span>
+              </p>
+              <div className={styles.ButtonsWrapper}>
+                <button className="btn btn-success" onClick={handleClick}>Agregar al carrito</button>
+                <Link className="btn btn-primary" to="/">Volver al Inicio</Link>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
-    </div>
+          </section>
+        )}
+      </div>
+    </>
   );
 }
