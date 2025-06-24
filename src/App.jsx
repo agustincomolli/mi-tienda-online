@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ProductContext } from "./context/ProductContext";
 
 import About from "./pages/About";
@@ -24,6 +24,7 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 import 'boxicons/css/boxicons.min.css';
+import Swal from 'sweetalert2';
 
 /**
  * Componente principal de la aplicación.
@@ -48,7 +49,66 @@ import 'boxicons/css/boxicons.min.css';
 function App() {
   // Estado para mostrar u ocultar el carrito de compras.
   const [showCart, setShowCart] = useState(false);
-  const { products, loading, error } = useContext(ProductContext);
+  const { products, removeProduct, loading, error } = useContext(ProductContext);
+  const navigate = useNavigate();
+
+  /**
+   * Navega a la página de edición del producto con el ID proporcionado.
+   *
+   * @param {string|number} id - El identificador único del producto a editar.
+   */
+  function handleEdit(id) {
+    navigate(`/admin/edit/${id}`);
+  }
+
+  /**
+   * Maneja la eliminación de un producto mostrando una alerta de confirmación.
+   * Si el usuario confirma, intenta eliminar el producto y muestra una alerta de éxito o error según el resultado.
+   * 
+   * @async
+   * @function
+   * @param {string|number} id - El identificador único del producto a eliminar.
+   * @returns {Promise<void>} No retorna ningún valor.
+   */
+  async function handleDelete(id) {
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará el producto de forma permanente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: "swal-btn-confirm",
+        cancelButton: "swal-btn-cancel"
+      }
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await removeProduct(id);
+        await Swal.fire({
+          title: "Eliminado",
+          text: "El producto fue eliminado correctamente.",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
+        });
+      } catch {
+        await Swal.fire({
+          title: "Error",
+          text: "No se pudo eliminar el producto.",
+          icon: "error",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "swal-btn-confirm",
+          }
+        });
+      }
+    }
+  }
 
   /**
    * Alterna la visibilidad del carrito de compras.
@@ -99,7 +159,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={getProductsComponent({ loading, error, products })} />
           {/* Ruta dinámica */}
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/:id" element={
+            <ProductDetail
+              onEdit={handleEdit}
+              onDelete={handleDelete} />
+          } />
           <Route path="/about" element={<About />} />
           {/* Ruta protegida, hay que iniciar sesión para acceder */}
           <Route element={<PrivateRoute />}>

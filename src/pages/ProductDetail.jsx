@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { getProductById } from "../api/products";
 import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 import { Helmet } from "@dr.pogodin/react-helmet";
 
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
@@ -13,8 +14,9 @@ import styles from "./ProductDetail.module.css"
  * Componente que muestra el detalle de un producto seleccionado.
  * Obtiene el producto por su id desde la API y permite agregarlo al carrito.
  */
-export default function ProductDetail() {
+export default function ProductDetail({ onEdit, onDelete }) {
   const { addToCart } = useContext(CartContext);
+  const { currentUser, isAdmin } = useContext(AuthContext);
   // Obtiene el parámetro 'id' de la URL
   const { id } = useParams();
 
@@ -128,7 +130,20 @@ export default function ProductDetail() {
                 <span>{renderStars(product.rating)}</span>
               </p>
               <div className={styles.ButtonsWrapper}>
-                <button className="btn btn-success" onClick={handleClick}>Agregar al carrito</button>
+                {currentUser && isAdmin ? (
+                  <>
+                    <button className="btn btn-primary" onClick={() => onEdit(product.id)}>
+                      <i className='bx bx-edit'></i> Editar
+                    </button>
+                    <button className="btn btn-danger" onClick={() => onDelete(product.id)}>
+                      <i className='bx bx-trash'></i> Eliminar
+                    </button>
+                  </>
+                ) : (
+                  <button className={`btn btn-success`} onClick={handleClick}>
+                    Agregar al Carrito
+                  </button>
+                )}
                 <Link className="btn btn-primary" to="/">Volver al Inicio</Link>
               </div>
             </div>
